@@ -1,0 +1,3393 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml-stylesheet href="file:///C|/Users/Aktah/Desktop/GBoard-SRC/pawno/xml/pawndoc.xsl" type="text/xsl"?>
+<doc source="C:\Users\Aktah\Desktop\GBoard-SRC\filterscripts\GBoard.pwn">
+	<assembly>
+		<name>GBoard.pwn</name>
+	</assembly>
+
+	<!-- general -->
+	<general>
+		MySQL plugin R41-4 
+	</general>
+
+	<members>
+
+		<!-- enumerations -->
+		<member name="T:BOARD_RANK_DATA" value="446">
+			<tagname value="BOARD_RANK_DATA"/>
+			<member name="C:boardID" value="0">
+			</member>
+			<member name="C:bX" value="1">
+				<tagname value="Float"/>
+			</member>
+			<member name="C:bY" value="2">
+				<tagname value="Float"/>
+			</member>
+			<member name="C:bZ" value="3">
+				<tagname value="Float"/>
+			</member>
+			<member name="C:bA" value="4">
+				<tagname value="Float"/>
+			</member>
+			<member name="C:bFieldName" value="5">
+				<size value="32"/>
+			</member>
+			<member name="C:boardInfo" value="37">
+				<size value="16"/>
+			</member>
+			<member name="C:boardType" value="53">
+			</member>
+			<member name="C:bMaxPlayer" value="54">
+			</member>
+			<member name="C:bObject" value="55">
+			</member>
+			<member name="C:bLineText" value="56">
+				<size value="6"/>
+			</member>
+			<member name="C:bText1" value="62">
+				<size value="64"/>
+			</member>
+			<member name="C:bText2" value="126">
+				<size value="64"/>
+			</member>
+			<member name="C:bText3" value="190">
+				<size value="64"/>
+			</member>
+			<member name="C:bText4" value="254">
+				<size value="64"/>
+			</member>
+			<member name="C:bText5" value="318">
+				<size value="64"/>
+			</member>
+			<member name="C:bText6" value="382">
+				<size value="64"/>
+			</member>
+		</member>
+
+		<!-- constants -->
+		<member name="C:cellmax" value="2147483647">
+			<referrer name="operator!(Float:)"/>
+		</member>
+		<member name="C:cellmin" value="-2147483648">
+			<referrer name="operator-(Float:)"/>
+		</member>
+		<member name="C:false" value="0">
+			<tagname value="bool"/>
+			<referrer name="OnPlayerDisconnect"/>
+			<referrer name="Board_Save"/>
+		</member>
+		<member name="C:true" value="1">
+			<tagname value="bool"/>
+			<referrer name="OnFilterScriptInit"/>
+			<referrer name="Itter_OnGameModeInit"/>
+			<referrer name="SSCANF_OnFilterScriptInit"/>
+			<referrer name="cmd_settingboard"/>
+		</member>
+
+		<!-- variables -->
+		<member name="F:Bot@YSII_Ag">
+			<referrer name="OnPlayerConnect"/>
+			<referrer name="OnGameModeInit"/>
+			<referrer name="Itter_OPDCInternal"/>
+		</member>
+		<member name="F:Bot@YSII_Cg">
+			<tagname value="_Y_ITER_C3"/>
+			<referrer name="OnGameModeInit"/>
+		</member>
+		<member name="F:CELLMIN_ON_MATCHES">
+		</member>
+		<member name="F:CarryBoard">
+			<referrer name="cmd_moveboard"/>
+			<referrer name="PutBoard"/>
+		</member>
+		<member name="F:Character@YSII_Ag">
+			<referrer name="OnPlayerConnect"/>
+			<referrer name="OnGameModeInit"/>
+			<referrer name="Itter_OPDCInternal"/>
+		</member>
+		<member name="F:Character@YSII_Cg">
+			<tagname value="_Y_ITER_C3"/>
+			<referrer name="OnGameModeInit"/>
+		</member>
+		<member name="F:Iter_Board@YSII_Ag">
+			<referrer name="OnBoardRemove"/>
+			<referrer name="Board_Nearest"/>
+			<referrer name="CreateBoard"/>
+			<referrer name="OnBoardCreated"/>
+			<referrer name="BoardUpdate"/>
+			<referrer name="SetBoardText"/>
+			<referrer name="UpdateBoardText"/>
+			<referrer name="RefreashBoard"/>
+			<referrer name="Board_Save"/>
+		</member>
+		<member name="F:Iter_Board@YSII_Cg">
+			<tagname value="_Y_ITER_C3"/>
+			<referrer name="OnBoardRemove"/>
+			<referrer name="CreateBoard"/>
+			<referrer name="Board_Load"/>
+		</member>
+		<member name="F:MATCH_NAME_PARTIAL">
+		</member>
+		<member name="F:OLD_DEFAULT_CUSTOM">
+		</member>
+		<member name="F:OLD_DEFAULT_KUSTOM">
+		</member>
+		<member name="F:OLD_DEFAULT_NAME">
+		</member>
+		<member name="F:Player@YSII_Ag">
+			<referrer name="OnPlayerConnect"/>
+			<referrer name="OnGameModeInit"/>
+			<referrer name="Itter_OPDCInternal"/>
+		</member>
+		<member name="F:Player@YSII_Cg">
+			<tagname value="_Y_ITER_C3"/>
+			<referrer name="OnGameModeInit"/>
+		</member>
+		<member name="F:SSCANF_QUIET">
+		</member>
+		<member name="F:SSCANF_gInit">
+			<tagname value="bool"/>
+			<referrer name="OnFilterScriptInit"/>
+			<referrer name="Itter_OnGameModeInit"/>
+		</member>
+		<member name="F:SSCANF_g_sPlayers">
+		</member>
+		<member name="F:Streamer_IncludeFileVersion">
+			<attribute name="public"/>
+		</member>
+		<member name="F:YSI_g_sCallbacks">
+			<referrer name="OnPlayerConnect"/>
+			<referrer name="OnGameModeInit"/>
+			<referrer name="OnPlayerDisconnect"/>
+		</member>
+		<member name="F:boardData">
+			<referrer name="PickBoard"/>
+			<referrer name="cmd_destroyboard"/>
+			<referrer name="OnBoardRemove"/>
+			<referrer name="cmd_settingboard"/>
+			<referrer name="Board_Nearest"/>
+			<referrer name="CreateBoard"/>
+			<referrer name="OnBoardCreated"/>
+			<referrer name="BoardUpdate"/>
+			<referrer name="UpdateBoardRank"/>
+			<referrer name="SetBoardText"/>
+			<referrer name="UpdateBoardText"/>
+			<referrer name="RefreashBoard"/>
+			<referrer name="Board_Save"/>
+			<referrer name="Board_Load"/>
+		</member>
+		<member name="F:boardTimer">
+			<referrer name="SSCANF_OnFilterScriptInit"/>
+			<referrer name="OnFilterScriptExit"/>
+		</member>
+		<member name="F:ce_dialog_btn1">
+			<referrer name="CE_ShowPlayerDialog"/>
+		</member>
+		<member name="F:dbCon">
+			<tagname value="MySQL"/>
+			<referrer name="SSCANF_OnFilterScriptInit"/>
+			<referrer name="g_mysql_Init"/>
+			<referrer name="g_mysql_Exit"/>
+			<referrer name="cmd_createboard"/>
+			<referrer name="cmd_destroyboard"/>
+			<referrer name="BoardUpdate"/>
+			<referrer name="Board_Save"/>
+		</member>
+		<member name="F:offsetX">
+			<tagname value="Float"/>
+			<referrer name="CreateBoard"/>
+		</member>
+		<member name="F:offsetY">
+			<tagname value="Float"/>
+			<referrer name="CreateBoard"/>
+		</member>
+		<member name="F:offsetZ">
+			<tagname value="Float"/>
+			<referrer name="CreateBoard"/>
+		</member>
+		<member name="F:zcmd_g_HasOPCE">
+			<tagname value="bool"/>
+			<referrer name="SSCANF_OnGameModeInit"/>
+			<referrer name="OnPlayerCommandText"/>
+		</member>
+		<member name="F:zcmd_g_HasOPCS">
+			<tagname value="bool"/>
+			<referrer name="SSCANF_OnGameModeInit"/>
+			<referrer name="OnPlayerCommandText"/>
+		</member>
+
+		<!-- functions -->
+		<member name="M:operator!(Float:)" syntax="operator!(Float:)(oper)">
+			<tagname value="bool"/>
+			<stacksize value="1"/>
+			<dependency name="cellmax"/>
+			<param name="oper">
+				<paraminfo>Float </paraminfo>
+			</param>
+		</member>
+		<member name="M:operator%(_:,Float:)" syntax="operator%(_:,Float:)(oper1, oper2)">
+			<stacksize value="1"/>
+			<param name="oper1">
+			</param>
+			<param name="oper2">
+				<paraminfo>Float </paraminfo>
+			</param>
+		</member>
+		<member name="M:operator%(Float:,_:)" syntax="operator%(Float:,_:)(oper1, oper2)">
+			<stacksize value="1"/>
+			<param name="oper1">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="oper2">
+			</param>
+		</member>
+		<member name="M:operator%(Float:,Float:)" syntax="operator%(Float:,Float:)(oper1, oper2)">
+			<stacksize value="1"/>
+			<param name="oper1">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="oper2">
+				<paraminfo>Float </paraminfo>
+			</param>
+		</member>
+		<member name="M:operator!=(Float:,_:)" syntax="operator!=(Float:,_:)(oper1, oper2)">
+			<tagname value="bool"/>
+			<stacksize value="4"/>
+			<dependency name="float"/>
+			<dependency name="floatcmp"/>
+			<param name="oper1">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="oper2">
+			</param>
+		</member>
+		<member name="M:operator!=(Float:,Float:)" syntax="operator!=(Float:,Float:)(oper1, oper2)">
+			<tagname value="bool"/>
+			<stacksize value="4"/>
+			<dependency name="floatcmp"/>
+			<param name="oper1">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="oper2">
+				<paraminfo>Float </paraminfo>
+			</param>
+		</member>
+		<member name="M:operator-(_:,Float:)" syntax="operator-(_:,Float:)(oper1, oper2)">
+			<tagname value="Float"/>
+			<stacksize value="4"/>
+			<dependency name="float"/>
+			<dependency name="floatsub"/>
+			<param name="oper1">
+			</param>
+			<param name="oper2">
+				<paraminfo>Float </paraminfo>
+			</param>
+		</member>
+		<member name="M:operator-(Float:,_:)" syntax="operator-(Float:,_:)(oper1, oper2)">
+			<tagname value="Float"/>
+			<stacksize value="4"/>
+			<dependency name="float"/>
+			<dependency name="floatsub"/>
+			<param name="oper1">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="oper2">
+			</param>
+		</member>
+		<member name="M:operator+(Float:,_:)" syntax="operator+(Float:,_:)(oper1, oper2)">
+			<tagname value="Float"/>
+			<stacksize value="4"/>
+			<referrer name="PutBoard"/>
+			<referrer name="OnBoardCreated"/>
+			<dependency name="float"/>
+			<dependency name="floatadd"/>
+			<param name="oper1">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="oper2">
+			</param>
+		</member>
+		<member name="M:operator/(_:,Float:)" syntax="operator/(_:,Float:)(oper1, oper2)">
+			<tagname value="Float"/>
+			<stacksize value="4"/>
+			<dependency name="float"/>
+			<dependency name="floatdiv"/>
+			<param name="oper1">
+			</param>
+			<param name="oper2">
+				<paraminfo>Float </paraminfo>
+			</param>
+		</member>
+		<member name="M:operator/(Float:,_:)" syntax="operator/(Float:,_:)(oper1, oper2)">
+			<tagname value="Float"/>
+			<stacksize value="4"/>
+			<dependency name="float"/>
+			<dependency name="floatdiv"/>
+			<param name="oper1">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="oper2">
+			</param>
+		</member>
+		<member name="M:operator*(Float:,_:)" syntax="operator*(Float:,_:)(oper1, oper2)">
+			<tagname value="Float"/>
+			<stacksize value="4"/>
+			<dependency name="float"/>
+			<dependency name="floatmul"/>
+			<param name="oper1">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="oper2">
+			</param>
+		</member>
+		<member name="M:operator++(Float:)" syntax="operator++(Float:)(oper)">
+			<tagname value="Float"/>
+			<stacksize value="1"/>
+			<dependency name="operator+(Float:,Float:)"/>
+			<param name="oper">
+				<paraminfo>Float </paraminfo>
+			</param>
+		</member>
+		<member name="M:operator-(Float:)" syntax="operator-(Float:)(oper)">
+			<tagname value="Float"/>
+			<stacksize value="1"/>
+			<referrer name="GetXYInFrontOfPlayer"/>
+			<dependency name="cellmin"/>
+			<param name="oper">
+				<paraminfo>Float </paraminfo>
+			</param>
+		</member>
+		<member name="M:operator--(Float:)" syntax="operator--(Float:)(oper)">
+			<tagname value="Float"/>
+			<stacksize value="1"/>
+			<dependency name="operator-(Float:,Float:)"/>
+			<param name="oper">
+				<paraminfo>Float </paraminfo>
+			</param>
+		</member>
+		<member name="M:operator-(Float:,Float:)" syntax="operator-(Float:,Float:)(oper1, oper2)">
+			<tagname value="Float"/>
+			<attribute name="native"/>
+			<referrer name="operator--(Float:)"/>
+			<referrer name="PutBoard"/>
+			<referrer name="CreateBoard"/>
+			<referrer name="OnBoardCreated"/>
+			<param name="oper1">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="oper2">
+				<paraminfo>Float </paraminfo>
+			</param>
+		</member>
+		<member name="M:operator+(Float:,Float:)" syntax="operator+(Float:,Float:)(oper1, oper2)">
+			<tagname value="Float"/>
+			<attribute name="native"/>
+			<referrer name="operator++(Float:)"/>
+			<referrer name="GetXYInFrontOfPlayer"/>
+			<param name="oper1">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="oper2">
+				<paraminfo>Float </paraminfo>
+			</param>
+		</member>
+		<member name="M:operator*(Float:,Float:)" syntax="operator*(Float:,Float:)(oper1, oper2)">
+			<tagname value="Float"/>
+			<attribute name="native"/>
+			<referrer name="GetXYInFrontOfPlayer"/>
+			<param name="oper1">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="oper2">
+				<paraminfo>Float </paraminfo>
+			</param>
+		</member>
+		<member name="M:Float:operator=(_:)" syntax="Float:operator=(_:)(oper)">
+			<tagname value="Float"/>
+			<attribute name="native"/>
+			<referrer name="PickBoard"/>
+			<referrer name="Board_Nearest"/>
+			<referrer name="CreateBoard"/>
+			<param name="oper">
+			</param>
+		</member>
+		<member name="M:operator==(Float:,Float:)" syntax="operator==(Float:,Float:)(oper1, oper2)">
+			<tagname value="bool"/>
+			<stacksize value="4"/>
+			<dependency name="floatcmp"/>
+			<param name="oper1">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="oper2">
+				<paraminfo>Float </paraminfo>
+			</param>
+		</member>
+		<member name="M:operator==(Float:,_:)" syntax="operator==(Float:,_:)(oper1, oper2)">
+			<tagname value="bool"/>
+			<stacksize value="4"/>
+			<dependency name="float"/>
+			<dependency name="floatcmp"/>
+			<param name="oper1">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="oper2">
+			</param>
+		</member>
+		<member name="M:operator&gt;(Float:,Float:)" syntax="operator&gt;(Float:,Float:)(oper1, oper2)">
+			<tagname value="bool"/>
+			<stacksize value="4"/>
+			<dependency name="floatcmp"/>
+			<param name="oper1">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="oper2">
+				<paraminfo>Float </paraminfo>
+			</param>
+		</member>
+		<member name="M:operator&gt;(Float:,_:)" syntax="operator&gt;(Float:,_:)(oper1, oper2)">
+			<tagname value="bool"/>
+			<stacksize value="4"/>
+			<dependency name="float"/>
+			<dependency name="floatcmp"/>
+			<param name="oper1">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="oper2">
+			</param>
+		</member>
+		<member name="M:operator&gt;(_:,Float:)" syntax="operator&gt;(_:,Float:)(oper1, oper2)">
+			<tagname value="bool"/>
+			<stacksize value="4"/>
+			<dependency name="float"/>
+			<dependency name="floatcmp"/>
+			<param name="oper1">
+			</param>
+			<param name="oper2">
+				<paraminfo>Float </paraminfo>
+			</param>
+		</member>
+		<member name="M:operator&gt;=(Float:,Float:)" syntax="operator&gt;=(Float:,Float:)(oper1, oper2)">
+			<tagname value="bool"/>
+			<stacksize value="4"/>
+			<dependency name="floatcmp"/>
+			<param name="oper1">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="oper2">
+				<paraminfo>Float </paraminfo>
+			</param>
+		</member>
+		<member name="M:operator&gt;=(Float:,_:)" syntax="operator&gt;=(Float:,_:)(oper1, oper2)">
+			<tagname value="bool"/>
+			<stacksize value="4"/>
+			<dependency name="float"/>
+			<dependency name="floatcmp"/>
+			<param name="oper1">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="oper2">
+			</param>
+		</member>
+		<member name="M:operator&gt;=(_:,Float:)" syntax="operator&gt;=(_:,Float:)(oper1, oper2)">
+			<tagname value="bool"/>
+			<stacksize value="4"/>
+			<dependency name="float"/>
+			<dependency name="floatcmp"/>
+			<param name="oper1">
+			</param>
+			<param name="oper2">
+				<paraminfo>Float </paraminfo>
+			</param>
+		</member>
+		<member name="M:operator&lt;(Float:,Float:)" syntax="operator&lt;(Float:,Float:)(oper1, oper2)">
+			<tagname value="bool"/>
+			<stacksize value="4"/>
+			<referrer name="Board_Nearest"/>
+			<dependency name="floatcmp"/>
+			<param name="oper1">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="oper2">
+				<paraminfo>Float </paraminfo>
+			</param>
+		</member>
+		<member name="M:operator&lt;(Float:,_:)" syntax="operator&lt;(Float:,_:)(oper1, oper2)">
+			<tagname value="bool"/>
+			<stacksize value="4"/>
+			<dependency name="float"/>
+			<dependency name="floatcmp"/>
+			<param name="oper1">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="oper2">
+			</param>
+		</member>
+		<member name="M:operator&lt;(_:,Float:)" syntax="operator&lt;(_:,Float:)(oper1, oper2)">
+			<tagname value="bool"/>
+			<stacksize value="4"/>
+			<dependency name="float"/>
+			<dependency name="floatcmp"/>
+			<param name="oper1">
+			</param>
+			<param name="oper2">
+				<paraminfo>Float </paraminfo>
+			</param>
+		</member>
+		<member name="M:operator&lt;=(Float:,Float:)" syntax="operator&lt;=(Float:,Float:)(oper1, oper2)">
+			<tagname value="bool"/>
+			<stacksize value="4"/>
+			<referrer name="Board_Nearest"/>
+			<dependency name="floatcmp"/>
+			<param name="oper1">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="oper2">
+				<paraminfo>Float </paraminfo>
+			</param>
+		</member>
+		<member name="M:operator&lt;=(Float:,_:)" syntax="operator&lt;=(Float:,_:)(oper1, oper2)">
+			<tagname value="bool"/>
+			<stacksize value="4"/>
+			<dependency name="float"/>
+			<dependency name="floatcmp"/>
+			<param name="oper1">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="oper2">
+			</param>
+		</member>
+		<member name="M:operator&lt;=(_:,Float:)" syntax="operator&lt;=(_:,Float:)(oper1, oper2)">
+			<tagname value="bool"/>
+			<stacksize value="4"/>
+			<dependency name="float"/>
+			<dependency name="floatcmp"/>
+			<param name="oper1">
+			</param>
+			<param name="oper2">
+				<paraminfo>Float </paraminfo>
+			</param>
+		</member>
+		<member name="M:@receivepacket" syntax="@receivepacket(packet[], size, source[])">
+			<attribute name="public"/>
+			<stacksize value="1"/>
+			<param name="packet">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="size">
+			</param>
+			<param name="source">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:@receivestring" syntax="@receivestring(message[], source[])">
+			<attribute name="public"/>
+			<stacksize value="1"/>
+			<param name="message">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="source">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:ApplyAnimation" syntax="ApplyAnimation(playerid, animlib[], animname[], fDelta, loop, lockx, locky, freeze, time, forcesync)">
+			<attribute name="native"/>
+			<referrer name="cmd_moveboard"/>
+			<referrer name="cmd_destroyboard"/>
+			<param name="playerid">
+			</param>
+			<param name="animlib">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="animname">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="fDelta">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="loop">
+			</param>
+			<param name="lockx">
+			</param>
+			<param name="locky">
+			</param>
+			<param name="freeze">
+			</param>
+			<param name="time">
+			</param>
+			<param name="forcesync">
+			</param>
+		</member>
+		<member name="M:AttachDynamicObjectToObject" syntax="AttachDynamicObjectToObject(objectid, attachtoid, offsetx, offsety, offsetz, rx, ry, rz, syncrotation)">
+			<attribute name="native"/>
+			<referrer name="CreateBoard"/>
+			<param name="objectid">
+			</param>
+			<param name="attachtoid">
+			</param>
+			<param name="offsetx">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="offsety">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="offsetz">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="rx">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="ry">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="rz">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="syncrotation">
+			</param>
+		</member>
+		<member name="M:BoardUpdate" syntax="BoardUpdate()">
+			<attribute name="public"/>
+			<stacksize value="395"/>
+			<dependency name="IsValidDynamicObject"/>
+			<dependency name="Iter_Board@YSII_Ag"/>
+			<dependency name="UpdateBoardText"/>
+			<dependency name="bFieldName"/>
+			<dependency name="bMaxPlayer"/>
+			<dependency name="bObject"/>
+			<dependency name="boardData"/>
+			<dependency name="boardData"/>
+			<dependency name="boardInfo"/>
+			<dependency name="boardType"/>
+			<dependency name="dbCon"/>
+			<dependency name="format"/>
+			<dependency name="mysql_pquery"/>
+		</member>
+		<member name="M:Board_Load" syntax="Board_Load()">
+			<attribute name="public"/>
+			<stacksize value="10"/>
+			<dependency name="CreateBoard"/>
+			<dependency name="Iter_Board@YSII_Cg"/>
+			<dependency name="bA"/>
+			<dependency name="bFieldName"/>
+			<dependency name="bMaxPlayer"/>
+			<dependency name="bText1"/>
+			<dependency name="bText2"/>
+			<dependency name="bText3"/>
+			<dependency name="bText4"/>
+			<dependency name="bText5"/>
+			<dependency name="bText6"/>
+			<dependency name="bX"/>
+			<dependency name="bY"/>
+			<dependency name="bZ"/>
+			<dependency name="boardData"/>
+			<dependency name="boardData"/>
+			<dependency name="boardID"/>
+			<dependency name="boardInfo"/>
+			<dependency name="boardType"/>
+			<dependency name="cache_get_row_count"/>
+			<dependency name="cache_get_value_name"/>
+			<dependency name="cache_get_value_name_float"/>
+			<dependency name="cache_get_value_name_int"/>
+			<dependency name="printf"/>
+		</member>
+		<member name="M:Board_Nearest" syntax="Board_Nearest(playerid, radius)">
+			<stacksize value="10"/>
+			<referrer name="cmd_moveboard"/>
+			<referrer name="cmd_destroyboard"/>
+			<referrer name="cmd_settingboard"/>
+			<dependency name="Float:operator=(_:)"/>
+			<dependency name="operator&lt;(Float:,Float:)"/>
+			<dependency name="operator&lt;=(Float:,Float:)"/>
+			<dependency name="GetPlayerDistanceFromPoint"/>
+			<dependency name="Iter_Board@YSII_Ag"/>
+			<dependency name="bX"/>
+			<dependency name="bY"/>
+			<dependency name="bZ"/>
+			<dependency name="boardData"/>
+			<param name="playerid">
+			</param>
+			<param name="radius">
+				<paraminfo>Float </paraminfo>
+			</param>
+		</member>
+		<member name="M:Board_Save" syntax="Board_Save(id)">
+			<stacksize value="532"/>
+			<referrer name="PutBoard"/>
+			<referrer name="cmd_settingboard"/>
+			<referrer name="OnBoardCreated"/>
+			<dependency name="Iter_Board@YSII_Ag"/>
+			<dependency name="Itter_ContainsInternal"/>
+			<dependency name="bA"/>
+			<dependency name="bFieldName"/>
+			<dependency name="bMaxPlayer"/>
+			<dependency name="bText1"/>
+			<dependency name="bText2"/>
+			<dependency name="bText3"/>
+			<dependency name="bText4"/>
+			<dependency name="bText5"/>
+			<dependency name="bText6"/>
+			<dependency name="bX"/>
+			<dependency name="bY"/>
+			<dependency name="bZ"/>
+			<dependency name="boardData"/>
+			<dependency name="boardData"/>
+			<dependency name="boardID"/>
+			<dependency name="boardInfo"/>
+			<dependency name="boardType"/>
+			<dependency name="dbCon"/>
+			<dependency name="false"/>
+			<dependency name="format"/>
+			<dependency name="mysql_tquery"/>
+			<param name="id">
+			</param>
+		</member>
+		<member name="M:CE_Convert" syntax="CE_Convert(string[])">
+			<attribute name="native"/>
+			<referrer name="CE_SendClientMessage"/>
+			<referrer name="CE_SendClientMessageToAll"/>
+			<referrer name="CE_SetDynamicObjectMaterialText"/>
+			<param name="string">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:CE_Convert_Dialog" syntax="CE_Convert_Dialog(string[], style)">
+			<attribute name="native"/>
+			<referrer name="CE_ShowPlayerDialog"/>
+			<referrer name="CE_Create3DTextLabel"/>
+			<referrer name="CE_Update3DTextLabelText"/>
+			<referrer name="CE_CreateDynamic3DTextLabel"/>
+			<referrer name="CE_UpdateDynamic3DTextLabelText"/>
+			<param name="string">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="style">
+			</param>
+		</member>
+		<member name="M:CE_Create3DTextLabel" syntax="CE_Create3DTextLabel(text[], color, X, Y, Z, DrawDistance, virtualworld, testLOS)">
+			<tagname value="Text3D"/>
+			<stacksize value="11"/>
+			<dependency name="CE_Convert_Dialog"/>
+			<dependency name="Create3DTextLabel"/>
+			<param name="text">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="color">
+			</param>
+			<param name="X">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="Y">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="Z">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="DrawDistance">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="virtualworld">
+			</param>
+			<param name="testLOS">
+			</param>
+		</member>
+		<member name="M:CE_CreateDynamic3DTextLabel" syntax="CE_CreateDynamic3DTextLabel(text[], color, x, y, z, drawdistance, attachedplayer, attachedvehicle, testlos, worldid, interiorid, playerid, streamdistance, areaid, priority)">
+			<tagname value="Text3D"/>
+			<stacksize value="18"/>
+			<dependency name="CE_Convert_Dialog"/>
+			<dependency name="CreateDynamic3DTextLabel"/>
+			<param name="text">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="color">
+			</param>
+			<param name="x">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="y">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="z">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="drawdistance">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="attachedplayer">
+			</param>
+			<param name="attachedvehicle">
+			</param>
+			<param name="testlos">
+			</param>
+			<param name="worldid">
+			</param>
+			<param name="interiorid">
+			</param>
+			<param name="playerid">
+			</param>
+			<param name="streamdistance">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="areaid">
+			</param>
+			<param name="priority">
+			</param>
+		</member>
+		<member name="M:CE_SendClientMessage" syntax="CE_SendClientMessage(playerid, color, text[])">
+			<stacksize value="5"/>
+			<referrer name="cmd_boardcmds"/>
+			<referrer name="cmd_destroyboard"/>
+			<referrer name="OnBoardRemove"/>
+			<referrer name="cmd_settingboard"/>
+			<referrer name="OnBoardCreated"/>
+			<dependency name="CE_Convert"/>
+			<dependency name="SendClientMessage"/>
+			<dependency name="format"/>
+			<param name="playerid">
+			</param>
+			<param name="color">
+			</param>
+			<param name="text">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:CE_SendClientMessageToAll" syntax="CE_SendClientMessageToAll(color, text[])">
+			<stacksize value="5"/>
+			<dependency name="CE_Convert"/>
+			<dependency name="SendClientMessageToAll"/>
+			<dependency name="format"/>
+			<param name="color">
+			</param>
+			<param name="text">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:CE_SetDynamicObjectMaterialText" syntax="CE_SetDynamicObjectMaterialText(objectid, materialindex, text[], materialsize, fontface[], fontsize, bold, fontcolor, backcolor, textalignment)">
+			<stacksize value="524"/>
+			<referrer name="CreateBoard"/>
+			<referrer name="SetBoardText"/>
+			<referrer name="UpdateBoardText"/>
+			<dependency name="CE_Convert"/>
+			<dependency name="SetDynamicObjectMaterialText"/>
+			<dependency name="format"/>
+			<param name="objectid">
+			</param>
+			<param name="materialindex">
+			</param>
+			<param name="text">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="materialsize">
+			</param>
+			<param name="fontface">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="fontsize">
+			</param>
+			<param name="bold">
+			</param>
+			<param name="fontcolor">
+			</param>
+			<param name="backcolor">
+			</param>
+			<param name="textalignment">
+			</param>
+		</member>
+		<member name="M:CE_ShowPlayerDialog" syntax="CE_ShowPlayerDialog(playerid, dialogid, style, caption[], info[], button1[], button2[])">
+			<stacksize value="9"/>
+			<dependency name="CE_Convert_Dialog"/>
+			<dependency name="ShowPlayerDialog"/>
+			<dependency name="ce_dialog_btn1"/>
+			<dependency name="format"/>
+			<dependency name="strlen"/>
+			<param name="playerid">
+			</param>
+			<param name="dialogid">
+			</param>
+			<param name="style">
+			</param>
+			<param name="caption">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="info">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="button1">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="button2">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:CE_Update3DTextLabelText" syntax="CE_Update3DTextLabelText(id, color, text[])">
+			<stacksize value="5"/>
+			<dependency name="CE_Convert_Dialog"/>
+			<dependency name="Update3DTextLabelText"/>
+			<param name="id">
+				<paraminfo>Text3D </paraminfo>
+			</param>
+			<param name="color">
+			</param>
+			<param name="text">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:CE_UpdateDynamic3DTextLabelText" syntax="CE_UpdateDynamic3DTextLabelText(id, color, text[])">
+			<stacksize value="5"/>
+			<dependency name="CE_Convert_Dialog"/>
+			<dependency name="UpdateDynamic3DTextLabelText"/>
+			<param name="id">
+				<paraminfo>Text3D </paraminfo>
+			</param>
+			<param name="color">
+			</param>
+			<param name="text">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:CallLocalFunction" syntax="CallLocalFunction(function[], format[], ...)">
+			<attribute name="native"/>
+			<referrer name="OnPlayerConnect"/>
+			<referrer name="OnGameModeInit"/>
+			<referrer name="OnPlayerDisconnect"/>
+			<referrer name="SSCANF_OnGameModeInit"/>
+			<referrer name="OnPlayerCommandText"/>
+			<param name="function">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="format">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="...">
+				<paraminfo> {Float,_} </paraminfo>
+			</param>
+		</member>
+		<member name="M:Create3DTextLabel" syntax="Create3DTextLabel(text[], color, X, Y, Z, DrawDistance, virtualworld, testLOS)">
+			<tagname value="Text3D"/>
+			<attribute name="native"/>
+			<referrer name="CE_Create3DTextLabel"/>
+			<param name="text">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="color">
+			</param>
+			<param name="X">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="Y">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="Z">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="DrawDistance">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="virtualworld">
+			</param>
+			<param name="testLOS">
+			</param>
+		</member>
+		<member name="M:CreateBoard" syntax="CreateBoard(id, x, y, z, a)">
+			<attribute name="public"/>
+			<stacksize value="16"/>
+			<referrer name="PutBoard"/>
+			<referrer name="OnBoardCreated"/>
+			<referrer name="Board_Load"/>
+			<dependency name="operator-(Float:,Float:)"/>
+			<dependency name="Float:operator=(_:)"/>
+			<dependency name="AttachDynamicObjectToObject"/>
+			<dependency name="CE_SetDynamicObjectMaterialText"/>
+			<dependency name="CreateDynamicObject"/>
+			<dependency name="DestroyDynamicObject"/>
+			<dependency name="IsValidDynamicObject"/>
+			<dependency name="Iter_Board@YSII_Ag"/>
+			<dependency name="Iter_Board@YSII_Cg"/>
+			<dependency name="Itter_AddInternal"/>
+			<dependency name="Itter_ContainsInternal"/>
+			<dependency name="Itter_FreeInternal"/>
+			<dependency name="bA"/>
+			<dependency name="bLineText"/>
+			<dependency name="bObject"/>
+			<dependency name="bText1"/>
+			<dependency name="bText2"/>
+			<dependency name="bText3"/>
+			<dependency name="bText4"/>
+			<dependency name="bText5"/>
+			<dependency name="bText6"/>
+			<dependency name="bX"/>
+			<dependency name="bY"/>
+			<dependency name="bZ"/>
+			<dependency name="boardData"/>
+			<dependency name="boardData"/>
+			<dependency name="offsetX"/>
+			<dependency name="offsetY"/>
+			<dependency name="offsetZ"/>
+			<param name="id">
+			</param>
+			<param name="x">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="y">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="z">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="a">
+				<paraminfo>Float </paraminfo>
+			</param>
+		</member>
+		<member name="M:CreateDynamic3DTextLabel" syntax="CreateDynamic3DTextLabel(text[], color, x, y, z, drawdistance, attachedplayer, attachedvehicle, testlos, worldid, interiorid, playerid, streamdistance, areaid, priority)">
+			<tagname value="Text3D"/>
+			<attribute name="native"/>
+			<referrer name="CE_CreateDynamic3DTextLabel"/>
+			<param name="text">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="color">
+			</param>
+			<param name="x">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="y">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="z">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="drawdistance">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="attachedplayer">
+			</param>
+			<param name="attachedvehicle">
+			</param>
+			<param name="testlos">
+			</param>
+			<param name="worldid">
+			</param>
+			<param name="interiorid">
+			</param>
+			<param name="playerid">
+			</param>
+			<param name="streamdistance">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="areaid">
+			</param>
+			<param name="priority">
+			</param>
+		</member>
+		<member name="M:CreateDynamicObject" syntax="CreateDynamicObject(modelid, x, y, z, rx, ry, rz, worldid, interiorid, playerid, streamdistance, drawdistance, areaid, priority)">
+			<attribute name="native"/>
+			<referrer name="CreateBoard"/>
+			<param name="modelid">
+			</param>
+			<param name="x">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="y">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="z">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="rx">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="ry">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="rz">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="worldid">
+			</param>
+			<param name="interiorid">
+			</param>
+			<param name="playerid">
+			</param>
+			<param name="streamdistance">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="drawdistance">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="areaid">
+			</param>
+			<param name="priority">
+			</param>
+		</member>
+		<member name="M:DestroyDynamicObject" syntax="DestroyDynamicObject(objectid)">
+			<attribute name="native"/>
+			<referrer name="PickBoard"/>
+			<referrer name="OnBoardRemove"/>
+			<referrer name="CreateBoard"/>
+			<param name="objectid">
+			</param>
+		</member>
+		<member name="M:GetMaxPlayers" syntax="GetMaxPlayers()">
+			<attribute name="native"/>
+			<referrer name="OnFilterScriptInit"/>
+			<referrer name="Itter_OnGameModeInit"/>
+		</member>
+		<member name="M:GetPlayerDistanceFromPoint" syntax="GetPlayerDistanceFromPoint(playerid, X, Y, Z)">
+			<tagname value="Float"/>
+			<attribute name="native"/>
+			<referrer name="Board_Nearest"/>
+			<param name="playerid">
+			</param>
+			<param name="X">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="Y">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="Z">
+				<paraminfo>Float </paraminfo>
+			</param>
+		</member>
+		<member name="M:GetPlayerFacingAngle" syntax="GetPlayerFacingAngle(playerid, &amp;ang)">
+			<attribute name="native"/>
+			<referrer name="PutBoard"/>
+			<referrer name="OnBoardCreated"/>
+			<referrer name="GetXYInFrontOfPlayer"/>
+			<param name="playerid">
+			</param>
+			<param name="ang">
+				<paraminfo>Float &amp; </paraminfo>
+			</param>
+		</member>
+		<member name="M:GetPlayerName" syntax="GetPlayerName(playerid, name[], len)">
+			<attribute name="native"/>
+			<referrer name="Itter_OnPlayerConnect"/>
+			<param name="playerid">
+			</param>
+			<param name="name">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="len">
+			</param>
+		</member>
+		<member name="M:GetPlayerPos" syntax="GetPlayerPos(playerid, &amp;x, &amp;y, &amp;z)">
+			<attribute name="native"/>
+			<referrer name="PutBoard"/>
+			<referrer name="OnBoardCreated"/>
+			<referrer name="GetXYInFrontOfPlayer"/>
+			<param name="playerid">
+			</param>
+			<param name="x">
+				<paraminfo>Float &amp; </paraminfo>
+			</param>
+			<param name="y">
+				<paraminfo>Float &amp; </paraminfo>
+			</param>
+			<param name="z">
+				<paraminfo>Float &amp; </paraminfo>
+			</param>
+		</member>
+		<member name="M:GetPlayerVehicleID" syntax="GetPlayerVehicleID(playerid)">
+			<attribute name="native"/>
+			<referrer name="GetXYInFrontOfPlayer"/>
+			<param name="playerid">
+			</param>
+		</member>
+		<member name="M:GetVehicleZAngle" syntax="GetVehicleZAngle(vehicleid, &amp;z_angle)">
+			<attribute name="native"/>
+			<referrer name="GetXYInFrontOfPlayer"/>
+			<param name="vehicleid">
+			</param>
+			<param name="z_angle">
+				<paraminfo>Float &amp; </paraminfo>
+			</param>
+		</member>
+		<member name="M:GetXYInFrontOfPlayer" syntax="GetXYInFrontOfPlayer(playerid, &amp;x, &amp;y, distance)">
+			<stacksize value="7"/>
+			<referrer name="PutBoard"/>
+			<referrer name="OnBoardCreated"/>
+			<dependency name="operator-(Float:)"/>
+			<dependency name="operator+(Float:,Float:)"/>
+			<dependency name="operator*(Float:,Float:)"/>
+			<dependency name="GetPlayerFacingAngle"/>
+			<dependency name="GetPlayerPos"/>
+			<dependency name="GetPlayerVehicleID"/>
+			<dependency name="GetVehicleZAngle"/>
+			<dependency name="degrees"/>
+			<dependency name="floatcos"/>
+			<dependency name="floatsin"/>
+			<param name="playerid">
+			</param>
+			<param name="x">
+				<paraminfo>Float &amp; </paraminfo>
+			</param>
+			<param name="y">
+				<paraminfo>Float &amp; </paraminfo>
+			</param>
+			<param name="distance">
+				<paraminfo>Float </paraminfo>
+			</param>
+		</member>
+		<member name="M:IsPlayerConnected" syntax="IsPlayerConnected(playerid)">
+			<attribute name="native"/>
+			<referrer name="OnGameModeInit"/>
+			<referrer name="Itter_OPDCInternal"/>
+			<param name="playerid">
+			</param>
+		</member>
+		<member name="M:IsPlayerNPC" syntax="IsPlayerNPC(playerid)">
+			<attribute name="native"/>
+			<referrer name="OnPlayerConnect"/>
+			<referrer name="OnGameModeInit"/>
+			<referrer name="Itter_OPDCInternal"/>
+			<referrer name="Itter_OnPlayerConnect"/>
+			<param name="playerid">
+			</param>
+		</member>
+		<member name="M:IsValidDynamicObject" syntax="IsValidDynamicObject(objectid)">
+			<attribute name="native"/>
+			<referrer name="CreateBoard"/>
+			<referrer name="BoardUpdate"/>
+			<param name="objectid">
+			</param>
+		</member>
+		<member name="M:Itter_AddInternal" syntax="Itter_AddInternal(&amp;count, array[], value, size)">
+			<stacksize value="3"/>
+			<referrer name="OnPlayerConnect"/>
+			<referrer name="CreateBoard"/>
+			<param name="count">
+				<paraminfo> &amp; </paraminfo>
+			</param>
+			<param name="array">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="value">
+			</param>
+			<param name="size">
+			</param>
+		</member>
+		<member name="M:Itter_ClearInternal" syntax="Itter_ClearInternal(&amp;count, array[], size)">
+			<stacksize value="3"/>
+			<param name="count">
+				<paraminfo> &amp; </paraminfo>
+			</param>
+			<param name="array">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="size">
+			</param>
+		</member>
+		<member name="M:Itter_ContainsInternal" syntax="Itter_ContainsInternal(array[], value, size)">
+			<stacksize value="1"/>
+			<referrer name="CreateBoard"/>
+			<referrer name="OnBoardCreated"/>
+			<referrer name="SetBoardText"/>
+			<referrer name="UpdateBoardText"/>
+			<referrer name="RefreashBoard"/>
+			<referrer name="Board_Save"/>
+			<param name="array">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="value">
+			</param>
+			<param name="size">
+			</param>
+		</member>
+		<member name="M:Itter_FreeInternal" syntax="Itter_FreeInternal(array[], size)">
+			<stacksize value="2"/>
+			<referrer name="CreateBoard"/>
+			<param name="array">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="size">
+			</param>
+		</member>
+		<member name="M:Itter_InitInternal" syntax="Itter_InitInternal(arr[][], s0, s1)">
+			<stacksize value="4"/>
+			<param name="arr">
+				<paraminfo> [][] </paraminfo>
+			</param>
+			<param name="s0">
+			</param>
+			<param name="s1">
+			</param>
+		</member>
+		<member name="M:Itter_OPDCInternal" syntax="Itter_OPDCInternal(playerid)">
+			<attribute name="public"/>
+			<stacksize value="7"/>
+			<dependency name="Bot@YSII_Ag"/>
+			<dependency name="Character@YSII_Ag"/>
+			<dependency name="IsPlayerConnected"/>
+			<dependency name="IsPlayerNPC"/>
+			<dependency name="Itter_RemoveInternal"/>
+			<dependency name="Player@YSII_Ag"/>
+			<param name="playerid">
+			</param>
+		</member>
+		<member name="M:Itter_OnGameModeInit" syntax="Itter_OnGameModeInit()">
+			<attribute name="public"/>
+			<stacksize value="5"/>
+			<dependency name="GetMaxPlayers"/>
+			<dependency name="SSCANF_Init"/>
+			<dependency name="SSCANF_gInit"/>
+			<dependency name="true"/>
+		</member>
+		<member name="M:Itter_OnPlayerConnect" syntax="Itter_OnPlayerConnect(playerid)">
+			<attribute name="public"/>
+			<stacksize value="29"/>
+			<dependency name="GetPlayerName"/>
+			<dependency name="IsPlayerNPC"/>
+			<dependency name="SSCANF_Join"/>
+			<param name="playerid">
+			</param>
+		</member>
+		<member name="M:Itter_OnPlayerDisconnect" syntax="Itter_OnPlayerDisconnect(playerid, reason)">
+			<attribute name="public"/>
+			<stacksize value="3"/>
+			<dependency name="SSCANF_Leave"/>
+			<param name="playerid">
+			</param>
+			<param name="reason">
+			</param>
+		</member>
+		<member name="M:Itter_PrevInternal" syntax="Itter_PrevInternal(array[], size, slot)">
+			<stacksize value="3"/>
+			<param name="array">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="size">
+			</param>
+			<param name="slot">
+			</param>
+		</member>
+		<member name="M:Itter_RandomInternal" syntax="Itter_RandomInternal(count, array[], size)">
+			<stacksize value="4"/>
+			<dependency name="random"/>
+			<param name="count">
+			</param>
+			<param name="array">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="size">
+			</param>
+		</member>
+		<member name="M:Itter_RemoveInternal" syntax="Itter_RemoveInternal(&amp;count, array[], value, size)">
+			<stacksize value="9"/>
+			<referrer name="Itter_OPDCInternal"/>
+			<referrer name="OnBoardRemove"/>
+			<dependency name="Itter_SafeRemoveInternal"/>
+			<param name="count">
+				<paraminfo> &amp; </paraminfo>
+			</param>
+			<param name="array">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="value">
+			</param>
+			<param name="size">
+			</param>
+		</member>
+		<member name="M:Itter_SafeRemoveInternal" syntax="Itter_SafeRemoveInternal(&amp;count, array[], value, &amp;last, size)">
+			<stacksize value="2"/>
+			<referrer name="Itter_RemoveInternal"/>
+			<param name="count">
+				<paraminfo> &amp; </paraminfo>
+			</param>
+			<param name="array">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="value">
+			</param>
+			<param name="last">
+				<paraminfo> &amp; </paraminfo>
+			</param>
+			<param name="size">
+			</param>
+		</member>
+		<member name="M:KillTimer" syntax="KillTimer(timerid)">
+			<attribute name="native"/>
+			<referrer name="OnFilterScriptExit"/>
+			<param name="timerid">
+			</param>
+		</member>
+		<member name="M:OnActorStreamIn" syntax="OnActorStreamIn(actorid, forplayerid)">
+			<stacksize value="1"/>
+			<param name="actorid">
+			</param>
+			<param name="forplayerid">
+			</param>
+		</member>
+		<member name="M:OnActorStreamOut" syntax="OnActorStreamOut(actorid, forplayerid)">
+			<stacksize value="1"/>
+			<param name="actorid">
+			</param>
+			<param name="forplayerid">
+			</param>
+		</member>
+		<member name="M:OnBoardCreated" syntax="OnBoardCreated(playerid)">
+			<attribute name="public"/>
+			<stacksize value="13"/>
+			<dependency name="operator+(Float:,_:)"/>
+			<dependency name="operator-(Float:,Float:)"/>
+			<dependency name="Board_Save"/>
+			<dependency name="CE_SendClientMessage"/>
+			<dependency name="CreateBoard"/>
+			<dependency name="GetPlayerFacingAngle"/>
+			<dependency name="GetPlayerPos"/>
+			<dependency name="GetXYInFrontOfPlayer"/>
+			<dependency name="Iter_Board@YSII_Ag"/>
+			<dependency name="Itter_ContainsInternal"/>
+			<dependency name="RefreashBoard"/>
+			<dependency name="bFieldName"/>
+			<dependency name="bMaxPlayer"/>
+			<dependency name="bText1"/>
+			<dependency name="bText2"/>
+			<dependency name="bText3"/>
+			<dependency name="bText4"/>
+			<dependency name="bText5"/>
+			<dependency name="bText6"/>
+			<dependency name="boardData"/>
+			<dependency name="boardData"/>
+			<dependency name="boardID"/>
+			<dependency name="boardInfo"/>
+			<dependency name="boardType"/>
+			<dependency name="cache_insert_id"/>
+			<dependency name="format"/>
+			<param name="playerid">
+			</param>
+		</member>
+		<member name="M:OnBoardRemove" syntax="OnBoardRemove(playerid, id)">
+			<attribute name="public"/>
+			<stacksize value="7"/>
+			<dependency name="CE_SendClientMessage"/>
+			<dependency name="DestroyDynamicObject"/>
+			<dependency name="Iter_Board@YSII_Ag"/>
+			<dependency name="Iter_Board@YSII_Cg"/>
+			<dependency name="Itter_RemoveInternal"/>
+			<dependency name="bLineText"/>
+			<dependency name="bObject"/>
+			<dependency name="boardData"/>
+			<param name="playerid">
+			</param>
+			<param name="id">
+			</param>
+		</member>
+		<member name="M:OnDialogResponse" syntax="OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+			<param name="dialogid">
+			</param>
+			<param name="response">
+			</param>
+			<param name="listitem">
+			</param>
+			<param name="inputtext">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:OnDynamicActorStreamIn" syntax="OnDynamicActorStreamIn(actorid, forplayerid)">
+			<stacksize value="1"/>
+			<param name="actorid">
+			</param>
+			<param name="forplayerid">
+			</param>
+		</member>
+		<member name="M:OnDynamicActorStreamOut" syntax="OnDynamicActorStreamOut(actorid, forplayerid)">
+			<stacksize value="1"/>
+			<param name="actorid">
+			</param>
+			<param name="forplayerid">
+			</param>
+		</member>
+		<member name="M:OnDynamicObjectMoved" syntax="OnDynamicObjectMoved(objectid)">
+			<stacksize value="1"/>
+			<param name="objectid">
+			</param>
+		</member>
+		<member name="M:OnEnterExitModShop" syntax="OnEnterExitModShop(playerid, enterexit, interiorid)">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+			<param name="enterexit">
+			</param>
+			<param name="interiorid">
+			</param>
+		</member>
+		<member name="M:OnFilterScriptExit" syntax="OnFilterScriptExit()">
+			<attribute name="public"/>
+			<stacksize value="3"/>
+			<dependency name="KillTimer"/>
+			<dependency name="boardTimer"/>
+			<dependency name="g_mysql_Exit"/>
+		</member>
+		<member name="M:OnFilterScriptInit" syntax="OnFilterScriptInit()">
+			<attribute name="public"/>
+			<stacksize value="5"/>
+			<dependency name="GetMaxPlayers"/>
+			<dependency name="SSCANF_Init"/>
+			<dependency name="SSCANF_gInit"/>
+			<dependency name="true"/>
+		</member>
+		<member name="M:OnGameModeExit" syntax="OnGameModeExit()">
+			<stacksize value="1"/>
+		</member>
+		<member name="M:OnGameModeInit" syntax="OnGameModeInit()">
+			<attribute name="public"/>
+			<stacksize value="7"/>
+			<dependency name="Bot@YSII_Ag"/>
+			<dependency name="Bot@YSII_Cg"/>
+			<dependency name="CallLocalFunction"/>
+			<dependency name="Character@YSII_Ag"/>
+			<dependency name="Character@YSII_Cg"/>
+			<dependency name="IsPlayerConnected"/>
+			<dependency name="IsPlayerNPC"/>
+			<dependency name="Player@YSII_Ag"/>
+			<dependency name="Player@YSII_Cg"/>
+			<dependency name="YSI_g_sCallbacks"/>
+			<dependency name="funcidx"/>
+		</member>
+		<member name="M:OnIncomingConnection" syntax="OnIncomingConnection(playerid, ip_address[], port)">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+			<param name="ip_address">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="port">
+			</param>
+		</member>
+		<member name="M:OnObjectMoved" syntax="OnObjectMoved(objectid)">
+			<stacksize value="1"/>
+			<param name="objectid">
+			</param>
+		</member>
+		<member name="M:OnOutcomeScmEvent" syntax="OnOutcomeScmEvent(playerid, issuerid, eventid, vehicleid, arg1, arg2)">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+			<param name="issuerid">
+			</param>
+			<param name="eventid">
+				<paraminfo>E_SCM_EVENT_TYPE </paraminfo>
+			</param>
+			<param name="vehicleid">
+			</param>
+			<param name="arg1">
+			</param>
+			<param name="arg2">
+			</param>
+		</member>
+		<member name="M:OnPlayerClickMap" syntax="OnPlayerClickMap(playerid, fX, fY, fZ)">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+			<param name="fX">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="fY">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="fZ">
+				<paraminfo>Float </paraminfo>
+			</param>
+		</member>
+		<member name="M:OnPlayerClickPlayer" syntax="OnPlayerClickPlayer(playerid, clickedplayerid, source)">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+			<param name="clickedplayerid">
+			</param>
+			<param name="source">
+			</param>
+		</member>
+		<member name="M:OnPlayerClickPlayerTextDraw" syntax="OnPlayerClickPlayerTextDraw(playerid, playertextid)">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+			<param name="playertextid">
+				<paraminfo>PlayerText </paraminfo>
+			</param>
+		</member>
+		<member name="M:OnPlayerClickTextDraw" syntax="OnPlayerClickTextDraw(playerid, clickedid)">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+			<param name="clickedid">
+				<paraminfo>Text </paraminfo>
+			</param>
+		</member>
+		<member name="M:OnPlayerClientGameInit" syntax="OnPlayerClientGameInit(playerid, &amp;usecjwalk, &amp;limitglobalchat, &amp;globalchatradius, &amp;nametagdistance, &amp;disableenterexits, &amp;nametaglos, &amp;manualvehengineandlights, &amp;spawnsavailable, &amp;shownametags, &amp;showplayermarkers, &amp;onfoot_rate, &amp;incar_rate, &amp;weapon_rate, &amp;lacgompmode, &amp;vehiclefriendlyfire)">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+			<param name="usecjwalk">
+				<paraminfo> &amp; </paraminfo>
+			</param>
+			<param name="limitglobalchat">
+				<paraminfo> &amp; </paraminfo>
+			</param>
+			<param name="globalchatradius">
+				<paraminfo>Float &amp; </paraminfo>
+			</param>
+			<param name="nametagdistance">
+				<paraminfo>Float &amp; </paraminfo>
+			</param>
+			<param name="disableenterexits">
+				<paraminfo> &amp; </paraminfo>
+			</param>
+			<param name="nametaglos">
+				<paraminfo> &amp; </paraminfo>
+			</param>
+			<param name="manualvehengineandlights">
+				<paraminfo> &amp; </paraminfo>
+			</param>
+			<param name="spawnsavailable">
+				<paraminfo> &amp; </paraminfo>
+			</param>
+			<param name="shownametags">
+				<paraminfo> &amp; </paraminfo>
+			</param>
+			<param name="showplayermarkers">
+				<paraminfo> &amp; </paraminfo>
+			</param>
+			<param name="onfoot_rate">
+				<paraminfo> &amp; </paraminfo>
+			</param>
+			<param name="incar_rate">
+				<paraminfo> &amp; </paraminfo>
+			</param>
+			<param name="weapon_rate">
+				<paraminfo> &amp; </paraminfo>
+			</param>
+			<param name="lacgompmode">
+				<paraminfo> &amp; </paraminfo>
+			</param>
+			<param name="vehiclefriendlyfire">
+				<paraminfo> &amp; </paraminfo>
+			</param>
+		</member>
+		<member name="M:OnPlayerCommandPerformed" syntax="OnPlayerCommandPerformed(playerid, cmdtext[], success)">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+			<param name="cmdtext">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="success">
+			</param>
+		</member>
+		<member name="M:OnPlayerCommandReceived" syntax="OnPlayerCommandReceived(playerid, cmdtext[])">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+			<param name="cmdtext">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:OnPlayerCommandText" syntax="OnPlayerCommandText(playerid, cmdtext[])">
+			<attribute name="public"/>
+			<stacksize value="43"/>
+			<dependency name="CallLocalFunction"/>
+			<dependency name="format"/>
+			<dependency name="tolower"/>
+			<dependency name="zcmd_g_HasOPCE"/>
+			<dependency name="zcmd_g_HasOPCS"/>
+			<param name="playerid">
+			</param>
+			<param name="cmdtext">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:OnPlayerConnect" syntax="OnPlayerConnect(playerid)">
+			<attribute name="public"/>
+			<stacksize value="7"/>
+			<dependency name="Bot@YSII_Ag"/>
+			<dependency name="CallLocalFunction"/>
+			<dependency name="Character@YSII_Ag"/>
+			<dependency name="IsPlayerNPC"/>
+			<dependency name="Itter_AddInternal"/>
+			<dependency name="Player@YSII_Ag"/>
+			<dependency name="YSI_g_sCallbacks"/>
+			<param name="playerid">
+			</param>
+		</member>
+		<member name="M:OnPlayerDeath" syntax="OnPlayerDeath(playerid, killerid, reason)">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+			<param name="killerid">
+			</param>
+			<param name="reason">
+			</param>
+		</member>
+		<member name="M:OnPlayerDisconnect" syntax="OnPlayerDisconnect(playerid, reason)">
+			<attribute name="public"/>
+			<stacksize value="7"/>
+			<dependency name="CallLocalFunction"/>
+			<dependency name="SetTimerEx"/>
+			<dependency name="YSI_g_sCallbacks"/>
+			<dependency name="false"/>
+			<param name="playerid">
+			</param>
+			<param name="reason">
+			</param>
+		</member>
+		<member name="M:OnPlayerEditAttachedObject" syntax="OnPlayerEditAttachedObject(playerid, response, index, modelid, boneid, fOffsetX, fOffsetY, fOffsetZ, fRotX, fRotY, fRotZ, fScaleX, fScaleY, fScaleZ)">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+			<param name="response">
+			</param>
+			<param name="index">
+			</param>
+			<param name="modelid">
+			</param>
+			<param name="boneid">
+			</param>
+			<param name="fOffsetX">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="fOffsetY">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="fOffsetZ">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="fRotX">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="fRotY">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="fRotZ">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="fScaleX">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="fScaleY">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="fScaleZ">
+				<paraminfo>Float </paraminfo>
+			</param>
+		</member>
+		<member name="M:OnPlayerEditDynamicObject" syntax="OnPlayerEditDynamicObject(playerid, objectid, response, x, y, z, rx, ry, rz)">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+			<param name="objectid">
+			</param>
+			<param name="response">
+			</param>
+			<param name="x">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="y">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="z">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="rx">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="ry">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="rz">
+				<paraminfo>Float </paraminfo>
+			</param>
+		</member>
+		<member name="M:OnPlayerEditObject" syntax="OnPlayerEditObject(playerid, playerobject, objectid, response, fX, fY, fZ, fRotX, fRotY, fRotZ)">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+			<param name="playerobject">
+			</param>
+			<param name="objectid">
+			</param>
+			<param name="response">
+			</param>
+			<param name="fX">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="fY">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="fZ">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="fRotX">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="fRotY">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="fRotZ">
+				<paraminfo>Float </paraminfo>
+			</param>
+		</member>
+		<member name="M:OnPlayerEnterCheckpoint" syntax="OnPlayerEnterCheckpoint(playerid)">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+		</member>
+		<member name="M:OnPlayerEnterDynamicArea" syntax="OnPlayerEnterDynamicArea(playerid, areaid)">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+			<param name="areaid">
+			</param>
+		</member>
+		<member name="M:OnPlayerEnterDynamicCP" syntax="OnPlayerEnterDynamicCP(playerid, checkpointid)">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+			<param name="checkpointid">
+			</param>
+		</member>
+		<member name="M:OnPlayerEnterDynamicRaceCP" syntax="OnPlayerEnterDynamicRaceCP(playerid, checkpointid)">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+			<param name="checkpointid">
+			</param>
+		</member>
+		<member name="M:OnPlayerEnterGangZone" syntax="OnPlayerEnterGangZone(playerid, zoneid)">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+			<param name="zoneid">
+			</param>
+		</member>
+		<member name="M:OnPlayerEnterPlayerGangZone" syntax="OnPlayerEnterPlayerGangZone(playerid, zoneid)">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+			<param name="zoneid">
+			</param>
+		</member>
+		<member name="M:OnPlayerEnterRaceCheckpoint" syntax="OnPlayerEnterRaceCheckpoint(playerid)">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+		</member>
+		<member name="M:OnPlayerEnterVehicle" syntax="OnPlayerEnterVehicle(playerid, vehicleid, ispassenger)">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+			<param name="vehicleid">
+			</param>
+			<param name="ispassenger">
+			</param>
+		</member>
+		<member name="M:OnPlayerExitVehicle" syntax="OnPlayerExitVehicle(playerid, vehicleid)">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+			<param name="vehicleid">
+			</param>
+		</member>
+		<member name="M:OnPlayerExitedMenu" syntax="OnPlayerExitedMenu(playerid)">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+		</member>
+		<member name="M:OnPlayerGiveDamage" syntax="OnPlayerGiveDamage(playerid, damagedid, amount, weaponid, bodypart)">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+			<param name="damagedid">
+			</param>
+			<param name="amount">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="weaponid">
+			</param>
+			<param name="bodypart">
+			</param>
+		</member>
+		<member name="M:OnPlayerGiveDamageActor" syntax="OnPlayerGiveDamageActor(playerid, damaged_actorid, amount, weaponid, bodypart)">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+			<param name="damaged_actorid">
+			</param>
+			<param name="amount">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="weaponid">
+			</param>
+			<param name="bodypart">
+			</param>
+		</member>
+		<member name="M:OnPlayerGiveDamageDynamicActor" syntax="OnPlayerGiveDamageDynamicActor(playerid, actorid, amount, weaponid, bodypart)">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+			<param name="actorid">
+			</param>
+			<param name="amount">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="weaponid">
+			</param>
+			<param name="bodypart">
+			</param>
+		</member>
+		<member name="M:OnPlayerInteriorChange" syntax="OnPlayerInteriorChange(playerid, newinteriorid, oldinteriorid)">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+			<param name="newinteriorid">
+			</param>
+			<param name="oldinteriorid">
+			</param>
+		</member>
+		<member name="M:OnPlayerKeyStateChange" syntax="OnPlayerKeyStateChange(playerid, newkeys, oldkeys)">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+			<param name="newkeys">
+			</param>
+			<param name="oldkeys">
+			</param>
+		</member>
+		<member name="M:OnPlayerLeaveCheckpoint" syntax="OnPlayerLeaveCheckpoint(playerid)">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+		</member>
+		<member name="M:OnPlayerLeaveDynamicArea" syntax="OnPlayerLeaveDynamicArea(playerid, areaid)">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+			<param name="areaid">
+			</param>
+		</member>
+		<member name="M:OnPlayerLeaveDynamicCP" syntax="OnPlayerLeaveDynamicCP(playerid, checkpointid)">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+			<param name="checkpointid">
+			</param>
+		</member>
+		<member name="M:OnPlayerLeaveDynamicRaceCP" syntax="OnPlayerLeaveDynamicRaceCP(playerid, checkpointid)">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+			<param name="checkpointid">
+			</param>
+		</member>
+		<member name="M:OnPlayerLeaveGangZone" syntax="OnPlayerLeaveGangZone(playerid, zoneid)">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+			<param name="zoneid">
+			</param>
+		</member>
+		<member name="M:OnPlayerLeavePlayerGangZone" syntax="OnPlayerLeavePlayerGangZone(playerid, zoneid)">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+			<param name="zoneid">
+			</param>
+		</member>
+		<member name="M:OnPlayerLeaveRaceCheckpoint" syntax="OnPlayerLeaveRaceCheckpoint(playerid)">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+		</member>
+		<member name="M:OnPlayerObjectMoved" syntax="OnPlayerObjectMoved(playerid, objectid)">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+			<param name="objectid">
+			</param>
+		</member>
+		<member name="M:OnPlayerPauseStateChange" syntax="OnPlayerPauseStateChange(playerid, pausestate)">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+			<param name="pausestate">
+			</param>
+		</member>
+		<member name="M:OnPlayerPickUpDynamicPickup" syntax="OnPlayerPickUpDynamicPickup(playerid, pickupid)">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+			<param name="pickupid">
+			</param>
+		</member>
+		<member name="M:OnPlayerPickUpPickup" syntax="OnPlayerPickUpPickup(playerid, pickupid)">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+			<param name="pickupid">
+			</param>
+		</member>
+		<member name="M:OnPlayerPickUpPlayerPickup" syntax="OnPlayerPickUpPlayerPickup(playerid, pickupid)">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+			<param name="pickupid">
+			</param>
+		</member>
+		<member name="M:OnPlayerRequestClass" syntax="OnPlayerRequestClass(playerid, classid)">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+			<param name="classid">
+			</param>
+		</member>
+		<member name="M:OnPlayerRequestSpawn" syntax="OnPlayerRequestSpawn(playerid)">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+		</member>
+		<member name="M:OnPlayerSelectDynamicObject" syntax="OnPlayerSelectDynamicObject(playerid, objectid, modelid, x, y, z)">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+			<param name="objectid">
+			</param>
+			<param name="modelid">
+			</param>
+			<param name="x">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="y">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="z">
+				<paraminfo>Float </paraminfo>
+			</param>
+		</member>
+		<member name="M:OnPlayerSelectObject" syntax="OnPlayerSelectObject(playerid, type, objectid, modelid, fX, fY, fZ)">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+			<param name="type">
+			</param>
+			<param name="objectid">
+			</param>
+			<param name="modelid">
+			</param>
+			<param name="fX">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="fY">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="fZ">
+				<paraminfo>Float </paraminfo>
+			</param>
+		</member>
+		<member name="M:OnPlayerSelectedMenuRow" syntax="OnPlayerSelectedMenuRow(playerid, row)">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+			<param name="row">
+			</param>
+		</member>
+		<member name="M:OnPlayerShootDynamicObject" syntax="OnPlayerShootDynamicObject(playerid, weaponid, objectid, x, y, z)">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+			<param name="weaponid">
+			</param>
+			<param name="objectid">
+			</param>
+			<param name="x">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="y">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="z">
+				<paraminfo>Float </paraminfo>
+			</param>
+		</member>
+		<member name="M:OnPlayerSpawn" syntax="OnPlayerSpawn(playerid)">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+		</member>
+		<member name="M:OnPlayerStateChange" syntax="OnPlayerStateChange(playerid, newstate, oldstate)">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+			<param name="newstate">
+			</param>
+			<param name="oldstate">
+			</param>
+		</member>
+		<member name="M:OnPlayerStatsAndWeaponsUpdate" syntax="OnPlayerStatsAndWeaponsUpdate(playerid)">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+		</member>
+		<member name="M:OnPlayerStreamIn" syntax="OnPlayerStreamIn(playerid, forplayerid)">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+			<param name="forplayerid">
+			</param>
+		</member>
+		<member name="M:OnPlayerStreamOut" syntax="OnPlayerStreamOut(playerid, forplayerid)">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+			<param name="forplayerid">
+			</param>
+		</member>
+		<member name="M:OnPlayerTakeDamage" syntax="OnPlayerTakeDamage(playerid, issuerid, amount, weaponid, bodypart)">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+			<param name="issuerid">
+			</param>
+			<param name="amount">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="weaponid">
+			</param>
+			<param name="bodypart">
+			</param>
+		</member>
+		<member name="M:OnPlayerText" syntax="OnPlayerText(playerid, text[])">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+			<param name="text">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:OnPlayerUpdate" syntax="OnPlayerUpdate(playerid)">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+		</member>
+		<member name="M:OnPlayerWeaponShot" syntax="OnPlayerWeaponShot(playerid, weaponid, hittype, hitid, fX, fY, fZ)">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+			<param name="weaponid">
+			</param>
+			<param name="hittype">
+			</param>
+			<param name="hitid">
+			</param>
+			<param name="fX">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="fY">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="fZ">
+				<paraminfo>Float </paraminfo>
+			</param>
+		</member>
+		<member name="M:OnQueryError" syntax="OnQueryError(errorid, error[], callback[], query[], handle)">
+			<stacksize value="1"/>
+			<param name="errorid">
+			</param>
+			<param name="error">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="callback">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="query">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="handle">
+				<paraminfo>MySQL </paraminfo>
+			</param>
+		</member>
+		<member name="M:OnRconCommand" syntax="OnRconCommand(cmd[])">
+			<stacksize value="1"/>
+			<param name="cmd">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:OnRconLoginAttempt" syntax="OnRconLoginAttempt(ip[], password[], success)">
+			<stacksize value="1"/>
+			<param name="ip">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="password">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="success">
+			</param>
+		</member>
+		<member name="M:OnRemoteRCONPacket" syntax="OnRemoteRCONPacket(ipaddr[], port, password[], success, command[])">
+			<stacksize value="1"/>
+			<param name="ipaddr">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="port">
+			</param>
+			<param name="password">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="success">
+			</param>
+			<param name="command">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:OnServerMessage" syntax="OnServerMessage(msg[])">
+			<stacksize value="1"/>
+			<param name="msg">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:OnServerQueryInfo" syntax="OnServerQueryInfo(ipaddr[], hostname[], gamemode[], language[])">
+			<stacksize value="1"/>
+			<param name="ipaddr">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="hostname">
+				<paraminfo> [51] </paraminfo>
+			</param>
+			<param name="gamemode">
+				<paraminfo> [31] </paraminfo>
+			</param>
+			<param name="language">
+				<paraminfo> [31] </paraminfo>
+			</param>
+		</member>
+		<member name="M:OnSystemCommandExecute" syntax="OnSystemCommandExecute(line_output[], retval, index, success, line_current, line_total)">
+			<stacksize value="1"/>
+			<param name="line_output">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="retval">
+			</param>
+			<param name="index">
+			</param>
+			<param name="success">
+			</param>
+			<param name="line_current">
+			</param>
+			<param name="line_total">
+			</param>
+		</member>
+		<member name="M:OnTrailerUpdate" syntax="OnTrailerUpdate(playerid, vehicleid)">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+			<param name="vehicleid">
+			</param>
+		</member>
+		<member name="M:OnUnoccupiedVehicleUpdate" syntax="OnUnoccupiedVehicleUpdate(vehicleid, playerid, passenger_seat, new_x, new_y, new_z, vel_x, vel_y, vel_z)">
+			<stacksize value="1"/>
+			<param name="vehicleid">
+			</param>
+			<param name="playerid">
+			</param>
+			<param name="passenger_seat">
+			</param>
+			<param name="new_x">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="new_y">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="new_z">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="vel_x">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="vel_y">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="vel_z">
+				<paraminfo>Float </paraminfo>
+			</param>
+		</member>
+		<member name="M:OnVehicleDamageStatusUpdate" syntax="OnVehicleDamageStatusUpdate(vehicleid, playerid)">
+			<stacksize value="1"/>
+			<param name="vehicleid">
+			</param>
+			<param name="playerid">
+			</param>
+		</member>
+		<member name="M:OnVehicleDeath" syntax="OnVehicleDeath(vehicleid, killerid)">
+			<stacksize value="1"/>
+			<param name="vehicleid">
+			</param>
+			<param name="killerid">
+			</param>
+		</member>
+		<member name="M:OnVehicleMod" syntax="OnVehicleMod(playerid, vehicleid, componentid)">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+			<param name="vehicleid">
+			</param>
+			<param name="componentid">
+			</param>
+		</member>
+		<member name="M:OnVehiclePaintjob" syntax="OnVehiclePaintjob(playerid, vehicleid, paintjobid)">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+			<param name="vehicleid">
+			</param>
+			<param name="paintjobid">
+			</param>
+		</member>
+		<member name="M:OnVehicleRespray" syntax="OnVehicleRespray(playerid, vehicleid, color1, color2)">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+			<param name="vehicleid">
+			</param>
+			<param name="color1">
+			</param>
+			<param name="color2">
+			</param>
+		</member>
+		<member name="M:OnVehicleSirenStateChange" syntax="OnVehicleSirenStateChange(playerid, vehicleid, newstate)">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+			<param name="vehicleid">
+			</param>
+			<param name="newstate">
+			</param>
+		</member>
+		<member name="M:OnVehicleSpawn" syntax="OnVehicleSpawn(vehicleid)">
+			<stacksize value="1"/>
+			<param name="vehicleid">
+			</param>
+		</member>
+		<member name="M:OnVehicleStreamIn" syntax="OnVehicleStreamIn(vehicleid, forplayerid)">
+			<stacksize value="1"/>
+			<param name="vehicleid">
+			</param>
+			<param name="forplayerid">
+			</param>
+		</member>
+		<member name="M:OnVehicleStreamOut" syntax="OnVehicleStreamOut(vehicleid, forplayerid)">
+			<stacksize value="1"/>
+			<param name="vehicleid">
+			</param>
+			<param name="forplayerid">
+			</param>
+		</member>
+		<member name="M:PickBoard" syntax="PickBoard(playerid, id)">
+			<attribute name="public"/>
+			<stacksize value="17"/>
+			<dependency name="Float:operator=(_:)"/>
+			<dependency name="DestroyDynamicObject"/>
+			<dependency name="SetPlayerAttachedObject"/>
+			<dependency name="SetPlayerSpecialAction"/>
+			<dependency name="bLineText"/>
+			<dependency name="bObject"/>
+			<dependency name="boardData"/>
+			<param name="playerid">
+			</param>
+			<param name="id">
+			</param>
+		</member>
+		<member name="M:PutBoard" syntax="PutBoard(playerid)">
+			<attribute name="public"/>
+			<stacksize value="12"/>
+			<dependency name="operator+(Float:,_:)"/>
+			<dependency name="operator-(Float:,Float:)"/>
+			<dependency name="Board_Save"/>
+			<dependency name="CarryBoard"/>
+			<dependency name="CreateBoard"/>
+			<dependency name="GetPlayerFacingAngle"/>
+			<dependency name="GetPlayerPos"/>
+			<dependency name="GetXYInFrontOfPlayer"/>
+			<dependency name="RemovePlayerAttachedObject"/>
+			<dependency name="SetPlayerSpecialAction"/>
+			<dependency name="Streamer_Update"/>
+			<param name="playerid">
+			</param>
+		</member>
+		<member name="M:RefreashBoard" syntax="RefreashBoard(id)">
+			<attribute name="public"/>
+			<stacksize value="134"/>
+			<referrer name="cmd_settingboard"/>
+			<referrer name="OnBoardCreated"/>
+			<dependency name="Iter_Board@YSII_Ag"/>
+			<dependency name="Itter_ContainsInternal"/>
+			<dependency name="UpdateBoardText"/>
+			<dependency name="bFieldName"/>
+			<dependency name="bMaxPlayer"/>
+			<dependency name="bText1"/>
+			<dependency name="bText2"/>
+			<dependency name="bText3"/>
+			<dependency name="bText4"/>
+			<dependency name="bText5"/>
+			<dependency name="bText6"/>
+			<dependency name="boardData"/>
+			<dependency name="boardData"/>
+			<dependency name="boardInfo"/>
+			<dependency name="boardType"/>
+			<dependency name="format"/>
+			<dependency name="strlen"/>
+			<param name="id">
+			</param>
+		</member>
+		<member name="M:RemovePlayerAttachedObject" syntax="RemovePlayerAttachedObject(playerid, index)">
+			<attribute name="native"/>
+			<referrer name="PutBoard"/>
+			<param name="playerid">
+			</param>
+			<param name="index">
+			</param>
+		</member>
+		<member name="M:ReturnBoardType" syntax="ReturnBoardType(type)">
+			<stacksize value="13"/>
+			<referrer name="cmd_settingboard"/>
+			<dependency name="ReturnBoardType"/>
+			<dependency name="format"/>
+			<param name="type">
+			</param>
+		</member>
+		<member name="M:SSCANF_Init" syntax="SSCANF_Init(players, invalid, len)">
+			<attribute name="native"/>
+			<referrer name="OnFilterScriptInit"/>
+			<referrer name="Itter_OnGameModeInit"/>
+			<param name="players">
+			</param>
+			<param name="invalid">
+			</param>
+			<param name="len">
+			</param>
+		</member>
+		<member name="M:SSCANF_Join" syntax="SSCANF_Join(playerid, name[], npc)">
+			<attribute name="native"/>
+			<referrer name="Itter_OnPlayerConnect"/>
+			<param name="playerid">
+			</param>
+			<param name="name">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="npc">
+			</param>
+		</member>
+		<member name="M:SSCANF_Leave" syntax="SSCANF_Leave(playerid)">
+			<attribute name="native"/>
+			<referrer name="Itter_OnPlayerDisconnect"/>
+			<param name="playerid">
+			</param>
+		</member>
+		<member name="M:SSCANF_OnFilterScriptInit" syntax="SSCANF_OnFilterScriptInit()">
+			<attribute name="public"/>
+			<stacksize value="6"/>
+			<dependency name="SetTimer"/>
+			<dependency name="boardTimer"/>
+			<dependency name="dbCon"/>
+			<dependency name="g_mysql_Init"/>
+			<dependency name="mysql_tquery"/>
+			<dependency name="print"/>
+			<dependency name="true"/>
+		</member>
+		<member name="M:SSCANF_OnGameModeInit" syntax="SSCANF_OnGameModeInit()">
+			<attribute name="public"/>
+			<stacksize value="4"/>
+			<dependency name="CallLocalFunction"/>
+			<dependency name="funcidx"/>
+			<dependency name="zcmd_g_HasOPCE"/>
+			<dependency name="zcmd_g_HasOPCS"/>
+		</member>
+		<member name="M:SendClientMessage" syntax="SendClientMessage(playerid, color, message[])">
+			<attribute name="native"/>
+			<referrer name="CE_SendClientMessage"/>
+			<param name="playerid">
+			</param>
+			<param name="color">
+			</param>
+			<param name="message">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:SendClientMessageToAll" syntax="SendClientMessageToAll(color, message[])">
+			<attribute name="native"/>
+			<referrer name="CE_SendClientMessageToAll"/>
+			<param name="color">
+			</param>
+			<param name="message">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:SendRconCommand" syntax="SendRconCommand(command[])">
+			<attribute name="native"/>
+			<referrer name="g_mysql_Init"/>
+			<param name="command">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:SetBoardText" syntax="SetBoardText(id, line, str[])">
+			<stacksize value="13"/>
+			<referrer name="cmd_settingboard"/>
+			<dependency name="CE_SetDynamicObjectMaterialText"/>
+			<dependency name="Iter_Board@YSII_Ag"/>
+			<dependency name="Itter_ContainsInternal"/>
+			<dependency name="bLineText"/>
+			<dependency name="bText1"/>
+			<dependency name="bText2"/>
+			<dependency name="bText3"/>
+			<dependency name="bText4"/>
+			<dependency name="bText5"/>
+			<dependency name="bText6"/>
+			<dependency name="boardData"/>
+			<dependency name="format"/>
+			<param name="id">
+			</param>
+			<param name="line">
+			</param>
+			<param name="str">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:SetDynamicObjectMaterialText" syntax="SetDynamicObjectMaterialText(objectid, materialindex, text[], materialsize, fontface[], fontsize, bold, fontcolor, backcolor, textalignment)">
+			<attribute name="native"/>
+			<referrer name="CE_SetDynamicObjectMaterialText"/>
+			<param name="objectid">
+			</param>
+			<param name="materialindex">
+			</param>
+			<param name="text">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="materialsize">
+			</param>
+			<param name="fontface">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="fontsize">
+			</param>
+			<param name="bold">
+			</param>
+			<param name="fontcolor">
+			</param>
+			<param name="backcolor">
+			</param>
+			<param name="textalignment">
+			</param>
+		</member>
+		<member name="M:SetPlayerAttachedObject" syntax="SetPlayerAttachedObject(playerid, index, modelid, bone, fOffsetX, fOffsetY, fOffsetZ, fRotX, fRotY, fRotZ, fScaleX, fScaleY, fScaleZ, materialcolor1, materialcolor2)">
+			<attribute name="native"/>
+			<referrer name="PickBoard"/>
+			<param name="playerid">
+			</param>
+			<param name="index">
+			</param>
+			<param name="modelid">
+			</param>
+			<param name="bone">
+			</param>
+			<param name="fOffsetX">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="fOffsetY">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="fOffsetZ">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="fRotX">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="fRotY">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="fRotZ">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="fScaleX">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="fScaleY">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="fScaleZ">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="materialcolor1">
+			</param>
+			<param name="materialcolor2">
+			</param>
+		</member>
+		<member name="M:SetPlayerSpecialAction" syntax="SetPlayerSpecialAction(playerid, actionid)">
+			<attribute name="native"/>
+			<referrer name="PutBoard"/>
+			<referrer name="PickBoard"/>
+			<param name="playerid">
+			</param>
+			<param name="actionid">
+			</param>
+		</member>
+		<member name="M:SetTimer" syntax="SetTimer(funcname[], interval, repeating)">
+			<attribute name="native"/>
+			<referrer name="SSCANF_OnFilterScriptInit"/>
+			<param name="funcname">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="interval">
+			</param>
+			<param name="repeating">
+			</param>
+		</member>
+		<member name="M:SetTimerEx" syntax="SetTimerEx(funcname[], interval, repeating, format[], ...)">
+			<attribute name="native"/>
+			<referrer name="OnPlayerDisconnect"/>
+			<referrer name="cmd_moveboard"/>
+			<param name="funcname">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="interval">
+			</param>
+			<param name="repeating">
+			</param>
+			<param name="format">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="...">
+				<paraminfo> {Float,_} </paraminfo>
+			</param>
+		</member>
+		<member name="M:ShowPlayerDialog" syntax="ShowPlayerDialog(playerid, dialogid, style, caption[], info[], button1[], button2[])">
+			<attribute name="native"/>
+			<referrer name="CE_ShowPlayerDialog"/>
+			<param name="playerid">
+			</param>
+			<param name="dialogid">
+			</param>
+			<param name="style">
+			</param>
+			<param name="caption">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="info">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="button1">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="button2">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:Streamer_OnItemStreamIn" syntax="Streamer_OnItemStreamIn(type, id)">
+			<stacksize value="1"/>
+			<param name="type">
+			</param>
+			<param name="id">
+				<paraminfo> {Text3D,_} </paraminfo>
+			</param>
+		</member>
+		<member name="M:Streamer_OnItemStreamOut" syntax="Streamer_OnItemStreamOut(type, id)">
+			<stacksize value="1"/>
+			<param name="type">
+			</param>
+			<param name="id">
+				<paraminfo> {Text3D,_} </paraminfo>
+			</param>
+		</member>
+		<member name="M:Streamer_OnPluginError" syntax="Streamer_OnPluginError(error[])">
+			<stacksize value="1"/>
+			<param name="error">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:Streamer_Update" syntax="Streamer_Update(playerid, type)">
+			<attribute name="native"/>
+			<referrer name="PutBoard"/>
+			<param name="playerid">
+			</param>
+			<param name="type">
+			</param>
+		</member>
+		<member name="M:Update3DTextLabelText" syntax="Update3DTextLabelText(id, color, text[])">
+			<attribute name="native"/>
+			<referrer name="CE_Update3DTextLabelText"/>
+			<param name="id">
+				<paraminfo>Text3D </paraminfo>
+			</param>
+			<param name="color">
+			</param>
+			<param name="text">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:UpdateBoardRank" syntax="UpdateBoardRank(id)">
+			<attribute name="public"/>
+			<stacksize value="196"/>
+			<dependency name="UpdateBoardText"/>
+			<dependency name="bFieldName"/>
+			<dependency name="bMaxPlayer"/>
+			<dependency name="boardData"/>
+			<dependency name="cache_get_row_count"/>
+			<dependency name="cache_get_value_name"/>
+			<dependency name="cache_get_value_name_int"/>
+			<dependency name="format"/>
+			<param name="id">
+			</param>
+		</member>
+		<member name="M:UpdateBoardText" syntax="UpdateBoardText(id, line, update_string[])">
+			<attribute name="public"/>
+			<stacksize value="13"/>
+			<referrer name="cmd_settingboard"/>
+			<referrer name="BoardUpdate"/>
+			<referrer name="UpdateBoardRank"/>
+			<referrer name="RefreashBoard"/>
+			<dependency name="CE_SetDynamicObjectMaterialText"/>
+			<dependency name="Iter_Board@YSII_Ag"/>
+			<dependency name="Itter_ContainsInternal"/>
+			<dependency name="bLineText"/>
+			<dependency name="boardData"/>
+			<param name="id">
+			</param>
+			<param name="line">
+			</param>
+			<param name="update_string">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:UpdateDynamic3DTextLabelText" syntax="UpdateDynamic3DTextLabelText(id, color, text[])">
+			<attribute name="native"/>
+			<referrer name="CE_UpdateDynamic3DTextLabelText"/>
+			<param name="id">
+				<paraminfo>Text3D </paraminfo>
+			</param>
+			<param name="color">
+			</param>
+			<param name="text">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cache_get_field_count" syntax="cache_get_field_count(&amp;destination)">
+			<attribute name="native"/>
+			<referrer name="cache_num_fields"/>
+			<param name="destination">
+				<paraminfo> &amp; </paraminfo>
+			</param>
+		</member>
+		<member name="M:cache_get_result_count" syntax="cache_get_result_count(&amp;destination)">
+			<attribute name="native"/>
+			<referrer name="cache_num_results"/>
+			<param name="destination">
+				<paraminfo> &amp; </paraminfo>
+			</param>
+		</member>
+		<member name="M:cache_get_row_count" syntax="cache_get_row_count(&amp;destination)">
+			<attribute name="native"/>
+			<referrer name="cache_num_rows"/>
+			<referrer name="UpdateBoardRank"/>
+			<referrer name="Board_Load"/>
+			<param name="destination">
+				<paraminfo> &amp; </paraminfo>
+			</param>
+		</member>
+		<member name="M:cache_get_value_index_bool" syntax="cache_get_value_index_bool(row_idx, column_idx, &amp;destination)">
+			<stacksize value="5"/>
+			<dependency name="cache_get_value_index_int"/>
+			<param name="row_idx">
+			</param>
+			<param name="column_idx">
+			</param>
+			<param name="destination">
+				<paraminfo>bool &amp; </paraminfo>
+			</param>
+		</member>
+		<member name="M:cache_get_value_index_int" syntax="cache_get_value_index_int(row_idx, column_idx, &amp;destination)">
+			<attribute name="native"/>
+			<referrer name="cache_get_value_index_bool"/>
+			<param name="row_idx">
+			</param>
+			<param name="column_idx">
+			</param>
+			<param name="destination">
+				<paraminfo> &amp; </paraminfo>
+			</param>
+		</member>
+		<member name="M:cache_get_value_name" syntax="cache_get_value_name(row_idx, column_name[], destination[], max_len)">
+			<attribute name="native"/>
+			<referrer name="UpdateBoardRank"/>
+			<referrer name="Board_Load"/>
+			<param name="row_idx">
+			</param>
+			<param name="column_name">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="destination">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="max_len">
+			</param>
+		</member>
+		<member name="M:cache_get_value_name_bool" syntax="cache_get_value_name_bool(row_idx, column_name[], &amp;destination)">
+			<stacksize value="5"/>
+			<dependency name="cache_get_value_name_int"/>
+			<param name="row_idx">
+			</param>
+			<param name="column_name">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="destination">
+				<paraminfo>bool &amp; </paraminfo>
+			</param>
+		</member>
+		<member name="M:cache_get_value_name_float" syntax="cache_get_value_name_float(row_idx, column_name[], &amp;destination)">
+			<attribute name="native"/>
+			<referrer name="Board_Load"/>
+			<param name="row_idx">
+			</param>
+			<param name="column_name">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="destination">
+				<paraminfo>Float &amp; </paraminfo>
+			</param>
+		</member>
+		<member name="M:cache_get_value_name_int" syntax="cache_get_value_name_int(row_idx, column_name[], &amp;destination)">
+			<attribute name="native"/>
+			<referrer name="cache_get_value_name_bool"/>
+			<referrer name="UpdateBoardRank"/>
+			<referrer name="Board_Load"/>
+			<param name="row_idx">
+			</param>
+			<param name="column_name">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="destination">
+				<paraminfo> &amp; </paraminfo>
+			</param>
+		</member>
+		<member name="M:cache_insert_id" syntax="cache_insert_id()">
+			<attribute name="native"/>
+			<referrer name="OnBoardCreated"/>
+		</member>
+		<member name="M:cache_num_fields" syntax="cache_num_fields()">
+			<stacksize value="4"/>
+			<dependency name="cache_get_field_count"/>
+		</member>
+		<member name="M:cache_num_results" syntax="cache_num_results()">
+			<stacksize value="4"/>
+			<dependency name="cache_get_result_count"/>
+		</member>
+		<member name="M:cache_num_rows" syntax="cache_num_rows()">
+			<stacksize value="4"/>
+			<dependency name="cache_get_row_count"/>
+		</member>
+		<member name="M:cmd_boardcmds" syntax="cmd_boardcmds(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="6"/>
+			<dependency name="CE_SendClientMessage"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_createboard" syntax="cmd_createboard(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="263"/>
+			<dependency name="dbCon"/>
+			<dependency name="mysql_format"/>
+			<dependency name="mysql_tquery"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_destroyboard" syntax="cmd_destroyboard(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="141"/>
+			<dependency name="ApplyAnimation"/>
+			<dependency name="Board_Nearest"/>
+			<dependency name="CE_SendClientMessage"/>
+			<dependency name="boardData"/>
+			<dependency name="boardData"/>
+			<dependency name="boardID"/>
+			<dependency name="dbCon"/>
+			<dependency name="format"/>
+			<dependency name="mysql_tquery"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_moveboard" syntax="cmd_moveboard(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="13"/>
+			<dependency name="ApplyAnimation"/>
+			<dependency name="Board_Nearest"/>
+			<dependency name="CarryBoard"/>
+			<dependency name="SetTimerEx"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:cmd_settingboard" syntax="cmd_settingboard(playerid, params[])">
+			<attribute name="public"/>
+			<stacksize value="392"/>
+			<dependency name="Board_Nearest"/>
+			<dependency name="Board_Save"/>
+			<dependency name="CE_SendClientMessage"/>
+			<dependency name="RefreashBoard"/>
+			<dependency name="ReturnBoardType"/>
+			<dependency name="SetBoardText"/>
+			<dependency name="UpdateBoardText"/>
+			<dependency name="bFieldName"/>
+			<dependency name="bMaxPlayer"/>
+			<dependency name="bText1"/>
+			<dependency name="bText2"/>
+			<dependency name="bText3"/>
+			<dependency name="bText4"/>
+			<dependency name="bText5"/>
+			<dependency name="bText6"/>
+			<dependency name="boardData"/>
+			<dependency name="boardData"/>
+			<dependency name="boardInfo"/>
+			<dependency name="boardType"/>
+			<dependency name="format"/>
+			<dependency name="sscanf"/>
+			<dependency name="strcmp"/>
+			<dependency name="strlen"/>
+			<dependency name="strval"/>
+			<dependency name="true"/>
+			<param name="playerid">
+			</param>
+			<param name="params">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:fclose" syntax="fclose(handle)">
+			<tagname value="bool"/>
+			<attribute name="native"/>
+			<referrer name="g_mysql_Init"/>
+			<param name="handle">
+				<paraminfo>File </paraminfo>
+			</param>
+		</member>
+		<member name="M:float" syntax="float(value)">
+			<tagname value="Float"/>
+			<attribute name="native"/>
+			<referrer name="operator*(Float:,_:)"/>
+			<referrer name="operator/(Float:,_:)"/>
+			<referrer name="operator/(_:,Float:)"/>
+			<referrer name="operator+(Float:,_:)"/>
+			<referrer name="operator-(Float:,_:)"/>
+			<referrer name="operator-(_:,Float:)"/>
+			<referrer name="operator==(Float:,_:)"/>
+			<referrer name="operator!=(Float:,_:)"/>
+			<referrer name="operator&gt;(Float:,_:)"/>
+			<referrer name="operator&gt;(_:,Float:)"/>
+			<referrer name="operator&gt;=(Float:,_:)"/>
+			<referrer name="operator&gt;=(_:,Float:)"/>
+			<referrer name="operator&lt;(Float:,_:)"/>
+			<referrer name="operator&lt;(_:,Float:)"/>
+			<referrer name="operator&lt;=(Float:,_:)"/>
+			<referrer name="operator&lt;=(_:,Float:)"/>
+			<param name="value">
+			</param>
+		</member>
+		<member name="M:floatadd" syntax="floatadd(oper1, oper2)">
+			<tagname value="Float"/>
+			<attribute name="native"/>
+			<referrer name="operator+(Float:,_:)"/>
+			<param name="oper1">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="oper2">
+				<paraminfo>Float </paraminfo>
+			</param>
+		</member>
+		<member name="M:floatcmp" syntax="floatcmp(oper1, oper2)">
+			<attribute name="native"/>
+			<referrer name="operator==(Float:,Float:)"/>
+			<referrer name="operator==(Float:,_:)"/>
+			<referrer name="operator!=(Float:,Float:)"/>
+			<referrer name="operator!=(Float:,_:)"/>
+			<referrer name="operator&gt;(Float:,Float:)"/>
+			<referrer name="operator&gt;(Float:,_:)"/>
+			<referrer name="operator&gt;(_:,Float:)"/>
+			<referrer name="operator&gt;=(Float:,Float:)"/>
+			<referrer name="operator&gt;=(Float:,_:)"/>
+			<referrer name="operator&gt;=(_:,Float:)"/>
+			<referrer name="operator&lt;(Float:,Float:)"/>
+			<referrer name="operator&lt;(Float:,_:)"/>
+			<referrer name="operator&lt;(_:,Float:)"/>
+			<referrer name="operator&lt;=(Float:,Float:)"/>
+			<referrer name="operator&lt;=(Float:,_:)"/>
+			<referrer name="operator&lt;=(_:,Float:)"/>
+			<param name="oper1">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="oper2">
+				<paraminfo>Float </paraminfo>
+			</param>
+		</member>
+		<member name="M:floatcos" syntax="floatcos(value, mode)">
+			<tagname value="Float"/>
+			<attribute name="native"/>
+			<referrer name="GetXYInFrontOfPlayer"/>
+			<param name="value">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="mode">
+				<paraminfo>anglemode </paraminfo>
+			</param>
+		</member>
+		<member name="M:floatdiv" syntax="floatdiv(dividend, divisor)">
+			<tagname value="Float"/>
+			<attribute name="native"/>
+			<referrer name="operator/(Float:,_:)"/>
+			<referrer name="operator/(_:,Float:)"/>
+			<param name="dividend">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="divisor">
+				<paraminfo>Float </paraminfo>
+			</param>
+		</member>
+		<member name="M:floatmul" syntax="floatmul(oper1, oper2)">
+			<tagname value="Float"/>
+			<attribute name="native"/>
+			<referrer name="operator*(Float:,_:)"/>
+			<param name="oper1">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="oper2">
+				<paraminfo>Float </paraminfo>
+			</param>
+		</member>
+		<member name="M:floatsin" syntax="floatsin(value, mode)">
+			<tagname value="Float"/>
+			<attribute name="native"/>
+			<referrer name="GetXYInFrontOfPlayer"/>
+			<param name="value">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="mode">
+				<paraminfo>anglemode </paraminfo>
+			</param>
+		</member>
+		<member name="M:floatsub" syntax="floatsub(oper1, oper2)">
+			<tagname value="Float"/>
+			<attribute name="native"/>
+			<referrer name="operator-(Float:,_:)"/>
+			<referrer name="operator-(_:,Float:)"/>
+			<param name="oper1">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="oper2">
+				<paraminfo>Float </paraminfo>
+			</param>
+		</member>
+		<member name="M:fopen" syntax="fopen(name[], mode)">
+			<tagname value="File"/>
+			<attribute name="native"/>
+			<referrer name="g_mysql_Init"/>
+			<param name="name">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="mode">
+				<paraminfo>filemode </paraminfo>
+			</param>
+		</member>
+		<member name="M:format" syntax="format(output[], len, format[], ...)">
+			<attribute name="native"/>
+			<referrer name="CE_SendClientMessage"/>
+			<referrer name="CE_SendClientMessageToAll"/>
+			<referrer name="CE_ShowPlayerDialog"/>
+			<referrer name="CE_SetDynamicObjectMaterialText"/>
+			<referrer name="OnPlayerCommandText"/>
+			<referrer name="cmd_destroyboard"/>
+			<referrer name="cmd_settingboard"/>
+			<referrer name="ReturnBoardType"/>
+			<referrer name="OnBoardCreated"/>
+			<referrer name="BoardUpdate"/>
+			<referrer name="UpdateBoardRank"/>
+			<referrer name="SetBoardText"/>
+			<referrer name="RefreashBoard"/>
+			<referrer name="Board_Save"/>
+			<param name="output">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="len">
+			</param>
+			<param name="format">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="...">
+				<paraminfo> {Float,_} </paraminfo>
+			</param>
+		</member>
+		<member name="M:fread" syntax="fread(handle, string[], size, pack)">
+			<attribute name="native"/>
+			<referrer name="g_mysql_Init"/>
+			<param name="handle">
+				<paraminfo>File </paraminfo>
+			</param>
+			<param name="string">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="size">
+			</param>
+			<param name="pack">
+				<paraminfo>bool </paraminfo>
+			</param>
+		</member>
+		<member name="M:funcidx" syntax="funcidx(name[])">
+			<attribute name="native"/>
+			<referrer name="OnGameModeInit"/>
+			<referrer name="SSCANF_OnGameModeInit"/>
+			<param name="name">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:g_mysql_Exit" syntax="g_mysql_Exit()">
+			<stacksize value="3"/>
+			<referrer name="OnFilterScriptExit"/>
+			<dependency name="dbCon"/>
+			<dependency name="mysql_close"/>
+		</member>
+		<member name="M:g_mysql_Init" syntax="g_mysql_Init()">
+			<stacksize value="265"/>
+			<referrer name="SSCANF_OnFilterScriptInit"/>
+			<dependency name="ALL"/>
+			<dependency name="SendRconCommand"/>
+			<dependency name="dbCon"/>
+			<dependency name="fclose"/>
+			<dependency name="fopen"/>
+			<dependency name="fread"/>
+			<dependency name="io_read"/>
+			<dependency name="mysql_connect"/>
+			<dependency name="mysql_errno"/>
+			<dependency name="mysql_log"/>
+			<dependency name="printf"/>
+			<dependency name="sscanf"/>
+		</member>
+		<member name="M:main" syntax="main()">
+			<attribute name="entry"/>
+			<stacksize value="1"/>
+		</member>
+		<member name="M:mysql_close" syntax="mysql_close(handle)">
+			<attribute name="native"/>
+			<referrer name="g_mysql_Exit"/>
+			<param name="handle">
+				<paraminfo>MySQL </paraminfo>
+			</param>
+		</member>
+		<member name="M:mysql_connect" syntax="mysql_connect(host[], user[], password[], database[], option_id)">
+			<tagname value="MySQL"/>
+			<attribute name="native"/>
+			<referrer name="g_mysql_Init"/>
+			<param name="host">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="user">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="password">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="database">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="option_id">
+				<paraminfo>MySQLOpt </paraminfo>
+			</param>
+		</member>
+		<member name="M:mysql_errno" syntax="mysql_errno(handle)">
+			<attribute name="native"/>
+			<referrer name="g_mysql_Init"/>
+			<param name="handle">
+				<paraminfo>MySQL </paraminfo>
+			</param>
+		</member>
+		<member name="M:mysql_format" syntax="mysql_format(handle, output[], max_len, format[], ...)">
+			<attribute name="native"/>
+			<referrer name="cmd_createboard"/>
+			<param name="handle">
+				<paraminfo>MySQL </paraminfo>
+			</param>
+			<param name="output">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="max_len">
+			</param>
+			<param name="format">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="...">
+				<paraminfo> {Float,_} </paraminfo>
+			</param>
+		</member>
+		<member name="M:mysql_log" syntax="mysql_log(loglevel)">
+			<attribute name="native"/>
+			<referrer name="g_mysql_Init"/>
+			<param name="loglevel">
+				<paraminfo>E_LOGLEVEL </paraminfo>
+			</param>
+		</member>
+		<member name="M:mysql_pquery" syntax="mysql_pquery(handle, query[], callback[], format[], ...)">
+			<attribute name="native"/>
+			<referrer name="BoardUpdate"/>
+			<param name="handle">
+				<paraminfo>MySQL </paraminfo>
+			</param>
+			<param name="query">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="callback">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="format">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="...">
+				<paraminfo> {Float,_} </paraminfo>
+			</param>
+		</member>
+		<member name="M:mysql_tquery" syntax="mysql_tquery(handle, query[], callback[], format[], ...)">
+			<attribute name="native"/>
+			<referrer name="SSCANF_OnFilterScriptInit"/>
+			<referrer name="cmd_createboard"/>
+			<referrer name="cmd_destroyboard"/>
+			<referrer name="Board_Save"/>
+			<param name="handle">
+				<paraminfo>MySQL </paraminfo>
+			</param>
+			<param name="query">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="callback">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="format">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="...">
+				<paraminfo> {Float,_} </paraminfo>
+			</param>
+		</member>
+		<member name="M:print" syntax="print(string[])">
+			<attribute name="native"/>
+			<referrer name="SSCANF_OnFilterScriptInit"/>
+			<param name="string">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:printf" syntax="printf(format[], ...)">
+			<attribute name="native"/>
+			<referrer name="g_mysql_Init"/>
+			<referrer name="Board_Load"/>
+			<param name="format">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="...">
+				<paraminfo> {Float,_} </paraminfo>
+			</param>
+		</member>
+		<member name="M:random" syntax="random(max)">
+			<attribute name="native"/>
+			<referrer name="Itter_RandomInternal"/>
+			<param name="max">
+			</param>
+		</member>
+		<member name="M:sscanf" syntax="sscanf(data[], format[], ...)">
+			<attribute name="native"/>
+			<referrer name="g_mysql_Init"/>
+			<referrer name="cmd_settingboard"/>
+			<param name="data">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="format">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="...">
+				<paraminfo> {Float,_} </paraminfo>
+			</param>
+		</member>
+		<member name="M:sscanf_vehicle" syntax="sscanf_vehicle(string[])">
+			<attribute name="public"/>
+			<stacksize value="6"/>
+			<dependency name="strcmp"/>
+			<dependency name="strval"/>
+			<param name="string">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:sscanf_weapon" syntax="sscanf_weapon(string[])">
+			<attribute name="public"/>
+			<stacksize value="6"/>
+			<dependency name="strcmp"/>
+			<dependency name="strval"/>
+			<param name="string">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:strcmp" syntax="strcmp(string1[], string2[], ignorecase, length)">
+			<attribute name="native"/>
+			<referrer name="sscanf_weapon"/>
+			<referrer name="sscanf_vehicle"/>
+			<referrer name="cmd_settingboard"/>
+			<param name="string1">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="string2">
+				<paraminfo> [] </paraminfo>
+			</param>
+			<param name="ignorecase">
+				<paraminfo>bool </paraminfo>
+			</param>
+			<param name="length">
+			</param>
+		</member>
+		<member name="M:strlen" syntax="strlen(string[])">
+			<attribute name="native"/>
+			<referrer name="CE_ShowPlayerDialog"/>
+			<referrer name="cmd_settingboard"/>
+			<referrer name="RefreashBoard"/>
+			<param name="string">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:strval" syntax="strval(string[])">
+			<attribute name="native"/>
+			<referrer name="sscanf_weapon"/>
+			<referrer name="sscanf_vehicle"/>
+			<referrer name="cmd_settingboard"/>
+			<param name="string">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:tolower" syntax="tolower(c)">
+			<attribute name="native"/>
+			<referrer name="OnPlayerCommandText"/>
+			<param name="c">
+			</param>
+		</member>
+		<member name="M:zcmd_OnGameModeInit" syntax="zcmd_OnGameModeInit()">
+			<stacksize value="1"/>
+		</member>
+		<member name="M:zcmd_OnPlayerCommandText" syntax="zcmd_OnPlayerCommandText(playerid, cmdtext[])">
+			<stacksize value="1"/>
+			<param name="playerid">
+			</param>
+			<param name="cmdtext">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+
+	</members>
+</doc>
