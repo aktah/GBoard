@@ -10,6 +10,7 @@ alt="ตัวอย่างระบบ GBoard" width="240" height="180" borde
 # วิธีติดตั้ง 
 
 ภาพประกอบ
+
 ![ภาพประกอบ phpMyAdmin](https://i.imgur.com/DgjA2e2.png)
 
 - ตั้งค่าการเชื่อมต่อฐานข้อมูลที่ไฟล์ scriptfiles/mysql.ini
