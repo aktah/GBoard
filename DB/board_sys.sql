@@ -35,7 +35,7 @@ CREATE TABLE `board_sys` (
   `boardZ` float NOT NULL,
   `boardA` float NOT NULL,
   `boardField` varchar(32) NOT NULL,
-  `boardInfo` varchar(16) NOT NULL,
+  `boardInfo` varchar(32) NOT NULL,
   `boardType` int(11) NOT NULL DEFAULT '0',
   `boardMaxPlayer` int(11) NOT NULL DEFAULT '0',
   `boardText1` varchar(64) NOT NULL,
