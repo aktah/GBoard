@@ -2,7 +2,7 @@
 #include <foreach>
 #include <sscanf2>
 #include <streamer>
-#include <YSF>
+// #include <YSF> // Version 2.0 ไม่จำเป็นต้องใช้แล้ว
 
 #define CE_AUTO
 #include <CEFix>   // aktah/SAMP-CEFix
@@ -16,6 +16,9 @@
 
 #define PLAYER_FIELD_NAME   ("Name") // ชื่อฟิลด์ของผู้เล่น
 #define PLAYER_TABLE_NAME   ("players") // ชื่อตารางของผู้เล่น
+
+#define SIZE_HEADER		48     // ขนาดหัวข้อ
+#define SIZE_TEXT		32       // ขนาดตัวหนังสือ
 
 
 
@@ -31,7 +34,7 @@ enum BOARD_RANK_DATA {
     Float:bA,
 
     bFieldName[32],
-    boardInfo[16],
+    boardInfo[32],
     boardType, // Static, Ranking
     bMaxPlayer,
     bObject,
@@ -47,9 +50,10 @@ enum BOARD_RANK_DATA {
 new boardData[MAX_BOARD_RANK][BOARD_RANK_DATA];
 new Iterator:Iter_Board<MAX_BOARD_RANK>;
 
-new const Float:offsetX = -1.2; // ซ้าย-ขวา
-new const Float:offsetY = 0.1;
-new const Float:offsetZ = 1.5;
+static const
+    Float:gboard = 0.08,
+    Float:OffPosZ = 1.8
+;
 
 new CarryBoard[MAX_PLAYERS]=-1;
 new boardTimer;
@@ -303,8 +307,8 @@ CMD:settingboard(playerid, params[])
             }
             else {
                 if(!strcmp(options, "ชื่ออันดับ", true)) {
-                    new lineText[16];
-                    if (sscanf(values, "s[16]", lineText))
+                    new lineText[32];
+                    if (sscanf(values, "s[32]", lineText))
                     {
                         SendClientMessage(playerid, COLOR_GRAD1, "การใช้: /settingboard ชื่ออันดับ [ชื่อ]");
                         SendClientMessage(playerid, COLOR_GRAD1, "ใช้ 'none' ลบล้างชื่อ");
@@ -313,7 +317,7 @@ CMD:settingboard(playerid, params[])
                     if(!strcmp(options, "none", true)) {
                         boardData[id][boardInfo][0] = '\0';
                     }
-                    else format(boardData[id][boardInfo], 16, lineText);   
+                    else format(boardData[id][boardInfo], 32, lineText);
                     RefreashBoard(id);
 
                     Board_Save(id);
@@ -405,30 +409,26 @@ public CreateBoard(id, Float:x, Float:y, Float:z, Float:a) {
 
             boardData[id][bObject] = CreateDynamicObject(3077, x, y, z, 0.0000, 0.0000, a);
 
-            boardData[id][bLineText][0] = CreateDynamicObject(19482, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
-            SetDynamicObjectMaterialText(boardData[id][bLineText][0], 0, boardData[id][bText1], 140, "Calibri", 24, 1, 0xFFFFFFFF, 0, 0);
-            AttachDynamicObjectToObject(boardData[id][bLineText][0], boardData[id][bObject], offsetX, offsetY, offsetZ, 0, 0, 90);
-
-            boardData[id][bLineText][1] = CreateDynamicObject(19482, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
-            SetDynamicObjectMaterialText(boardData[id][bLineText][1], 0, boardData[id][bText2], 140, "Calibri", 20, 1, 0xFFFFFFFF, 0, 0);
-            AttachDynamicObjectToObject(boardData[id][bLineText][1], boardData[id][bObject], offsetX, offsetY, offsetZ -0.4, 0, 0, 90);
-    
-            boardData[id][bLineText][2] = CreateDynamicObject(19482, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
-            SetDynamicObjectMaterialText(boardData[id][bLineText][2], 0, boardData[id][bText3], 140, "Calibri", 20, 1, 0xFFFFFFFF, 0, 0);
-            AttachDynamicObjectToObject(boardData[id][bLineText][2], boardData[id][bObject], offsetX, offsetY, offsetZ -0.7, 0, 0, 90);
-
-            boardData[id][bLineText][3] = CreateDynamicObject(19482, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
-            SetDynamicObjectMaterialText(boardData[id][bLineText][3], 0, boardData[id][bText4], 140, "Calibri", 20, 1, 0xFFFFFFFF, 0, 0);
-            AttachDynamicObjectToObject(boardData[id][bLineText][3], boardData[id][bObject], offsetX, offsetY, offsetZ -1.0, 0, 0, 90);
-
-            boardData[id][bLineText][4] = CreateDynamicObject(19482, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
-            SetDynamicObjectMaterialText(boardData[id][bLineText][4], 0, boardData[id][bText5], 140, "Calibri", 20, 1, 0xFFFFFFFF, 0, 0);
-            AttachDynamicObjectToObject(boardData[id][bLineText][4], boardData[id][bObject], offsetX, offsetY, offsetZ -1.3, 0, 0, 90);
-
-            boardData[id][bLineText][5] = CreateDynamicObject(19482, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
-            SetDynamicObjectMaterialText(boardData[id][bLineText][5], 0, boardData[id][bText6], 140, "Calibri", 20, 1, 0xFFFFFFFF, 0, 0);
-            AttachDynamicObjectToObject(boardData[id][bLineText][5], boardData[id][bObject], offsetX, offsetY, offsetZ -1.6, 0, 0, 90);
+            x += gboard * floatsin(-a, degrees);
+            y += gboard * floatcos(-a, degrees);
             
+	        boardData[id][bLineText][0] = CreateDynamicObject(18659, x, y, z + OffPosZ, 0.0, 0.0, a - 90);
+	        SetDynamicObjectMaterialText(boardData[id][bLineText][0], 0, boardData[id][bText1], 140, "Calibri", SIZE_HEADER, 1, 0xFFFFFFFF, 0, 0);
+
+	        boardData[id][bLineText][1] = CreateDynamicObject(18659, x, y, z + OffPosZ -0.4, 0.0, 0.0, a - 90);
+	        SetDynamicObjectMaterialText(boardData[id][bLineText][1], 0, boardData[id][bText2], 140, "Calibri", SIZE_TEXT, 1, 0xFFFFFFFF, 0, 0);
+
+	        boardData[id][bLineText][2] = CreateDynamicObject(18659, x, y, z + OffPosZ -0.7, 0.0, 0.0, a - 90);
+	        SetDynamicObjectMaterialText(boardData[id][bLineText][2], 0, boardData[id][bText3], 140, "Calibri", SIZE_TEXT, 1, 0xFFFFFFFF, 0, 0);
+
+	        boardData[id][bLineText][3] = CreateDynamicObject(18659, x, y, z + OffPosZ -1.0, 0.0, 0.0, a - 90);
+	        SetDynamicObjectMaterialText(boardData[id][bLineText][3], 0, boardData[id][bText4], 140, "Calibri", SIZE_TEXT, 1, 0xFFFFFFFF, 0, 0);
+
+	        boardData[id][bLineText][4] = CreateDynamicObject(18659, x, y, z + OffPosZ - 1.3, 0.0, 0.0, a - 90);
+	        SetDynamicObjectMaterialText(boardData[id][bLineText][4], 0, boardData[id][bText5], 140, "Calibri", SIZE_TEXT, 1, 0xFFFFFFFF, 0, 0);
+
+	        boardData[id][bLineText][5] = CreateDynamicObject(18659, x, y, z + OffPosZ - 1.6, 0.0, 0.0, a - 90);
+	        SetDynamicObjectMaterialText(boardData[id][bLineText][5], 0, boardData[id][bText6], 140, "Calibri", SIZE_TEXT, 1, 0xFFFFFFFF, 0, 0);
             Iter_Add(Iter_Board, id);
         }
     }
@@ -450,30 +450,27 @@ public CreateBoard(id, Float:x, Float:y, Float:z, Float:a) {
 
         boardData[id][bObject] = CreateDynamicObject(3077, x, y, z, 0.0000, 0.0000, a);
 
-        boardData[id][bLineText][0] = CreateDynamicObject(19482, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
-        SetDynamicObjectMaterialText(boardData[id][bLineText][0], 0, boardData[id][bText1], 140, "Calibri", 24, 1, 0xFFFFFFFF, 0, 0);
-        AttachDynamicObjectToObject(boardData[id][bLineText][0], boardData[id][bObject], offsetX, offsetY, offsetZ, 0, 0, 90);
-
-        boardData[id][bLineText][1] = CreateDynamicObject(19482, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
-        SetDynamicObjectMaterialText(boardData[id][bLineText][1], 0, boardData[id][bText2], 140, "Calibri", 20, 1, 0xFFFFFFFF, 0, 0);
-        AttachDynamicObjectToObject(boardData[id][bLineText][1], boardData[id][bObject], offsetX, offsetY, offsetZ -0.4, 0, 0, 90);
-    
-        boardData[id][bLineText][2] = CreateDynamicObject(19482, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
-        SetDynamicObjectMaterialText(boardData[id][bLineText][2], 0, boardData[id][bText3], 140, "Calibri", 20, 1, 0xFFFFFFFF, 0, 0);
-        AttachDynamicObjectToObject(boardData[id][bLineText][2], boardData[id][bObject], offsetX, offsetY, offsetZ -0.7, 0, 0, 90);
-
-        boardData[id][bLineText][3] = CreateDynamicObject(19482, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
-        SetDynamicObjectMaterialText(boardData[id][bLineText][3], 0, boardData[id][bText4], 140, "Calibri", 20, 1, 0xFFFFFFFF, 0, 0);
-        AttachDynamicObjectToObject(boardData[id][bLineText][3], boardData[id][bObject], offsetX, offsetY, offsetZ -1.0, 0, 0, 90);
-
-        boardData[id][bLineText][4] = CreateDynamicObject(19482, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
-        SetDynamicObjectMaterialText(boardData[id][bLineText][4], 0, boardData[id][bText5], 140, "Calibri", 20, 1, 0xFFFFFFFF, 0, 0);
-        AttachDynamicObjectToObject(boardData[id][bLineText][4], boardData[id][bObject], offsetX, offsetY, offsetZ -1.3, 0, 0, 90);
-
-        boardData[id][bLineText][5] = CreateDynamicObject(19482, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
-        SetDynamicObjectMaterialText(boardData[id][bLineText][5], 0, boardData[id][bText6], 140, "Calibri", 20, 1, 0xFFFFFFFF, 0, 0);
-        AttachDynamicObjectToObject(boardData[id][bLineText][5], boardData[id][bObject], offsetX, offsetY, offsetZ -1.6, 0, 0, 90);
+      	x += gboard * floatsin(-a, degrees);
+       	y += gboard * floatcos(-a, degrees);
         
+        boardData[id][bLineText][0] = CreateDynamicObject(18659, x, y, z + OffPosZ, 0.0, 0.0, a - 90);
+        SetDynamicObjectMaterialText(boardData[id][bLineText][0], 0, boardData[id][bText1], 140, "Calibri", SIZE_HEADER, 1, 0xFFFFFFFF, 0, 0);
+
+        boardData[id][bLineText][1] = CreateDynamicObject(18659, x, y, z + OffPosZ -0.4, 0.0, 0.0, a - 90);
+        SetDynamicObjectMaterialText(boardData[id][bLineText][1], 0, boardData[id][bText2], 140, "Calibri", SIZE_TEXT, 1, 0xFFFFFFFF, 0, 0);
+
+        boardData[id][bLineText][2] = CreateDynamicObject(18659, x, y, z + OffPosZ -0.7, 0.0, 0.0, a - 90);
+        SetDynamicObjectMaterialText(boardData[id][bLineText][2], 0, boardData[id][bText3], 140, "Calibri", SIZE_TEXT, 1, 0xFFFFFFFF, 0, 0);
+
+        boardData[id][bLineText][3] = CreateDynamicObject(18659, x, y, z + OffPosZ -1.0, 0.0, 0.0, a - 90);
+        SetDynamicObjectMaterialText(boardData[id][bLineText][3], 0, boardData[id][bText4], 140, "Calibri", SIZE_TEXT, 1, 0xFFFFFFFF, 0, 0);
+
+        boardData[id][bLineText][4] = CreateDynamicObject(18659, x, y, z + OffPosZ - 1.3, 0.0, 0.0, a - 90);
+        SetDynamicObjectMaterialText(boardData[id][bLineText][4], 0, boardData[id][bText5], 140, "Calibri", SIZE_TEXT, 1, 0xFFFFFFFF, 0, 0);
+
+        boardData[id][bLineText][5] = CreateDynamicObject(18659, x, y, z + OffPosZ - 1.6, 0.0, 0.0, a - 90);
+        SetDynamicObjectMaterialText(boardData[id][bLineText][5], 0, boardData[id][bText6], 140, "Calibri", SIZE_TEXT, 1, 0xFFFFFFFF, 0, 0);
+
     }
     return id;
 }
@@ -500,10 +497,10 @@ public OnBoardCreated(playerid)
             boardData[id][boardInfo][0] = '\0';
             format(boardData[id][bText1], 64, "การตั้งค่า");
             format(boardData[id][bText2], 64, "พิมพ์ {ffff00}/settingboard{ffffff} เพื่อตั้งค่า");
-            boardData[id][bText3][0] = '\0';
-            boardData[id][bText4][0] = '\0';
-            boardData[id][bText5][0] = '\0';
-            boardData[id][bText6][0] = '\0';
+            format(boardData[id][bText3], 64, "\r");
+            format(boardData[id][bText4], 64, "\r");
+            format(boardData[id][bText5], 64, "\r");
+            format(boardData[id][bText6], 64, "\r");
             Board_Save(id);
             RefreashBoard(id);
             SendClientMessage(playerid, -1, "คุณได้สร้างบอร์ดเรียบร้อยแล้ว !!");
@@ -560,7 +557,7 @@ public UpdateBoardRank(id) {
 forward SetBoardText(id, line, str[]);
 static SetBoardText(id, line, str[]) {
     if(Iter_Contains(Iter_Board, id) && line >= 0 && line <= 5) {
-        SetDynamicObjectMaterialText(boardData[id][bLineText][line], 0, str, 140, "Calibri", line==0 ? 24 : 20, 1, 0xFFFFFFFF, 0, 0);
+        SetDynamicObjectMaterialText(boardData[id][bLineText][line], 0, str, 140, "Calibri", line==0 ? SIZE_HEADER : SIZE_TEXT, 1, 0xFFFFFFFF, 0, 0);
         switch(line) {
             case 0: format(boardData[id][bText1], 64, str);
             case 1: format(boardData[id][bText2], 64, str);
@@ -575,7 +572,7 @@ static SetBoardText(id, line, str[]) {
 forward UpdateBoardText(id, line, update_string[]);
 public UpdateBoardText(id, line, update_string[]) {
     if(Iter_Contains(Iter_Board, id) && line >= 0 && line <= 5) {
-        SetDynamicObjectMaterialText(boardData[id][bLineText][line], 0, update_string, 140, "Calibri", line==0 ? 24 : 20, 1, 0xFFFFFFFF, 0, 0);
+        SetDynamicObjectMaterialText(boardData[id][bLineText][line], 0, update_string, 140, "Calibri", line==0 ? SIZE_HEADER : SIZE_TEXT, 1, 0xFFFFFFFF, 0, 0);
     }
 }
 
@@ -674,7 +671,7 @@ public Board_Load() {
         cache_get_value_name_float(i, "boardZ", boardData[i][bZ]);
         cache_get_value_name_float(i, "boardA", boardData[i][bA]);
         cache_get_value_name(i, "boardField", boardData[i][bFieldName], 32);
-        cache_get_value_name(i, "boardInfo", boardData[i][boardInfo], 16);
+        cache_get_value_name(i, "boardInfo", boardData[i][boardInfo], 32);
         cache_get_value_name_int(i, "boardType", boardData[i][boardType]);
         cache_get_value_name_int(i, "boardMaxPlayer", boardData[i][bMaxPlayer]);
         cache_get_value_name(i, "boardText1", boardData[i][bText1], 64);
